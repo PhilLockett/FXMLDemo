@@ -151,7 +151,7 @@ public class Model {
         data.setMyDouble(getDouble());
         data.setDay(getDayIndex());
     
-        if (!DataStore.writeData(data, getSettingsFile())) {
+        if (!data.writeData(getSettingsFile())) {
             data.dump();
 
             return false;

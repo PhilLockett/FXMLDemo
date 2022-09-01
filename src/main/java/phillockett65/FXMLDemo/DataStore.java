@@ -132,19 +132,18 @@ public class DataStore implements Serializable {
      */
 
     /**
-     * Static method that receives a populated DataStore and writes it to disc.
-     * @param dataStore contains the data.
+     * Writes populated DataStore to disc.
      * @param settingsFile path of the settings data file.
      * @return true if data successfully written to disc, false otherwise.
      */
-    public static boolean writeData(DataStore dataStore, String settingsFile) {
+    public boolean writeData(String settingsFile) {
         boolean success = false;
 
         ObjectOutputStream objectOutputStream;
         try {
             objectOutputStream = new ObjectOutputStream(new FileOutputStream(settingsFile));
 
-            objectOutputStream.writeObject(dataStore);
+            objectOutputStream.writeObject(this);
             success = true;
         } catch (IOException e) {
             e.printStackTrace();
