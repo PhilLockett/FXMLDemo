@@ -350,6 +350,8 @@ public class PrimaryController {
      * Initialize "Status Line" panel.
      */
     private void initializeStatusLine() {
+        statusLabel.setTooltip(new Tooltip("Current status"));
+        clearDataButton.setTooltip(new Tooltip("Caution! This irreversible action will reset the form data to default values"));
     }
 
 }
