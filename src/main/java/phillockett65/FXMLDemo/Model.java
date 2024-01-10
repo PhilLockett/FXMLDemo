@@ -103,6 +103,7 @@ public class Model {
      * Set all attributes to the default values.
      */
     public void defaultSettings() {
+        setSourceFilePath("");
         setMyText("Hello World");
         setMyBigText("");
 
@@ -133,6 +134,8 @@ public class Model {
      */
     public boolean writeData() {
         DataStore data = new DataStore();
+
+        data.setSourceDocument(getSourceFilePath());
 
         data.setMyText(getMyText());
         data.setMyBigText(getMyBigText());
@@ -177,6 +180,8 @@ public class Model {
         if (data == null)
             return false;
 
+        setSourceFilePath(data.getSourceDocument());
+
         setMyText(data.getMyText());
         setMyBigText(data.getMyBigText());
 
@@ -203,6 +208,30 @@ public class Model {
     
         return true;
     }
+
+
+
+    /************************************************************************
+     * Support code for "File Selector" panel.
+     */
+
+     private String sourceDocument;
+
+    /**
+     * Set the file path for the source PDF document.
+     * @param text string of the source document file path.
+     */
+    public void setSourceFilePath(String text) { sourceDocument = text; }
+
+    /**
+     * @return the file path for the current source PDF document.
+     */
+    public String getSourceFilePath() { return sourceDocument; }
+
+    /**
+     * @return true if a source document has been selected, false otherwise.
+     */
+    public boolean isSourceFilePath() { return !sourceDocument.isBlank(); }
 
 
 

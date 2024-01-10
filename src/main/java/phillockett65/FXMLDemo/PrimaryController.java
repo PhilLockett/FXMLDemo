@@ -24,6 +24,8 @@
  */
 package phillockett65.FXMLDemo;
 
+import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,6 +41,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -69,6 +72,7 @@ public class PrimaryController {
         // System.out.println("PrimaryController initialized.");
         model.initialize();
 
+        initializeFileSelector();
         initializeTextBoxes();
         initializeCheckBoxes();
         initializeSelections();
@@ -101,6 +105,7 @@ public class PrimaryController {
      * in the initialisation.
      */
     private void syncUI() {
+        sourceDocumentTextField.setText(model.getSourceFilePath());
         myTextField.setText(model.getMyText());
         myTextArea.setText(model.getMyBigText());
 
@@ -115,6 +120,62 @@ public class PrimaryController {
         myChoiceBox.setValue(model.getMonth());
         myComboBox.setValue(model.getBestDay());
         myColourPicker.setValue(model.getMyColour());
+    }
+
+
+
+    /************************************************************************
+     * Support code for "File Selector" panel.
+     */
+
+     @FXML
+     private TextField sourceDocumentTextField;
+ 
+     @FXML
+     private Button browseButton;
+ 
+
+     @FXML
+     void browseButtonActionPerformed(ActionEvent event) {
+        openFile();
+        setStatusMessage("Loaded file: " + model.getSourceFilePath());
+     }
+
+    /**
+     * Use a FileChooser dialogue to select the source PDF file.
+     * @return true if a file is selected, false otherwise.
+     */
+    private boolean openFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Text File");
+
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Test File", "*.txt"));
+
+        if (model.isSourceFilePath()) {
+            File current = new File(model.getSourceFilePath());
+            if (current.exists()) {
+                fileChooser.setInitialDirectory(new File(current.getParent()));
+                fileChooser.setInitialFileName(current.getName());
+            }
+        }
+
+        File file = fileChooser.showOpenDialog(model.getStage());
+        if (file != null) {
+            model.setSourceFilePath(file.getAbsolutePath());
+            syncUI();
+
+            return true;
+        }
+
+        return false;
+    }
+
+     /**
+     * Initialize "File Selector" panel.
+     */
+    private void initializeFileSelector() {
+        sourceDocumentTextField.setTooltip(new Tooltip("Selected source document"));
+        browseButton.setTooltip(new Tooltip("Select source document"));
     }
 
 

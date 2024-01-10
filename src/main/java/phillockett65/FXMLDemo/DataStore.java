@@ -36,6 +36,8 @@ import javafx.scene.paint.Color;
 public class DataStore implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private String sourceDocument;
+
     private String myText;
     private String myBigText;
 
@@ -63,6 +65,9 @@ public class DataStore implements Serializable {
 
     public DataStore() {
     }
+
+    public String getSourceDocument() { return sourceDocument; }
+    public void setSourceDocument(String text) { this.sourceDocument = text; }
 
     public String getMyText() { return myText; }
     public void setMyText(String myText) { this.myText = myText; }
@@ -111,6 +116,7 @@ public class DataStore implements Serializable {
       * Print data store on the command line.
       */
       public void dump() {
+        System.out.println("sourceDocument = " + sourceDocument);
         System.out.println("myText = " + myText);
         System.out.println("myBigText = " + myBigText);
         System.out.println("firstCheck = " + firstCheck);
