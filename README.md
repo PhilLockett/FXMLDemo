@@ -33,6 +33,23 @@ The following commands clone and execute the code:
 	mvn clean javafx:run
 
 ## Customization
+Once cloned, the following files should be modified:
+  * README.md
+  * pom.xml
+  * src/main/java/phillockett65/FXMLDemo/App.java
+  * src/main/java/phillockett65/FXMLDemo/DataStore.java
+  * src/main/java/phillockett65/FXMLDemo/Model.java
+  * src/main/java/phillockett65/FXMLDemo/PrimaryController.java
+  * src/main/resources/phillockett65/FXMLDemo/primary.fxml
+
+In the above files, the following changes need to be made:
+  * change all occurrences of 'FXMLDemo' to the new Application name
+  * change all occurrences of 'phillockett65' to your domain
+
+Finally rename the directories/folders in the same way:
+  * change all occurrences of 'FXMLDemo' to the new Application name
+  * change all occurrences of 'phillockett65' to your domain
+
 The GUI layout can be modified as desired by editing the 'primary.fxml' file. 
 The SceneBuilder application makes editing the layout easier than modifiying 
 'primary.fxml' directly.
