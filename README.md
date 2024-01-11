@@ -1,5 +1,4 @@
 # FXMLDemo
-
 'FXMLDemo' is a JavaFX application 'framework' that uses Maven, FXML and CSS.
 
 ## Overview
@@ -9,7 +8,7 @@ Maven resolves dependencies and builds the application independently of an IDE.
 
 The intention of this application is to provide a 'framework' from which other
 applications can be derived. It includes a number of different controls as 
-examples that can be cloned as needed.
+examples that can be cloned and modified as needed.
 
 ## Dependencies
 'FXMLDemo' is dependent on the following:
@@ -32,6 +31,14 @@ The following commands clone and execute the code:
 	git clone https://github.com/PhilLockett/FXMLDemo.git
 	cd FXMLDemo/
 	mvn clean javafx:run
+
+## Customization
+The GUI layout can be modified as desired by editing the 'primary.fxml' file. 
+The SceneBuilder application makes editing the layout easier than modifiying 
+'primary.fxml' directly.
+
+FXML also uses cascading style sheets for the presentation. To change the 
+colours and fonts used, edit the 'application.css' file.
 
 ## Points of interest
 This code has the following points of interest:
