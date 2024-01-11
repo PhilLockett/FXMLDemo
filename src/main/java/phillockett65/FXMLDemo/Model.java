@@ -115,7 +115,7 @@ public class Model {
 
         setInteger(10);
         setDouble(1.0);
-        setDayIndex(1);
+        setDay("Tuesday");
 
         setMonth("July");
         setBestDay("New Year");
@@ -159,7 +159,7 @@ public class Model {
 
         data.setMyInteger(getInteger());
         data.setMyDouble(getDouble());
-        data.setDay(getDayIndex());
+        data.setDay(getDay());
     
         if (!data.writeData(getSettingsFile())) {
             data.dump();
@@ -204,7 +204,7 @@ public class Model {
     
         setInteger(data.getMyInteger());
         setDouble(data.getMyDouble());
-        setDayIndex(data.getDay());
+        setDay(data.getDay());
     
         return true;
     }
@@ -353,17 +353,20 @@ public class Model {
 
     private SpinnerValueFactory<Double>  doubleSVF;
 
+    private SpinnerValueFactory<String>  daySVF;
+
     private ObservableList<String> daysOfWeekList = FXCollections.observableArrayList();
-    private ListSpinner day;
 
     public SpinnerValueFactory<Integer> getIntegerSVF() { return integerSVF; }
     public SpinnerValueFactory<Double> getDoubleSVF() { return doubleSVF; }
-    public SpinnerValueFactory<String> getDaySpinnerSVF() { return day.getSVF(); }
+    public SpinnerValueFactory<String> getDaySpinnerSVF() { return daySVF; }
 
     public int getInteger() { return integerSVF.getValue(); }
     public double getDouble() { return doubleSVF.getValue(); }
+    public String getDay() { return daySVF.getValue(); }
     public void setInteger(int value) { integerSVF.setValue(value); }
     public void setDouble(double value) { doubleSVF.setValue(value); }
+    public void setDay(String value) { daySVF.setValue(value); }
 
     /**
      * Selected Integer has changed, so synchronize values.
@@ -375,11 +378,11 @@ public class Model {
      */
     public void syncDouble() {  }
 
-    public String getDay() { return day.getCurrent(); }
-    private int getDayIndex() { return day.getIndex(); }
-    public void setDay(String value) { day.setCurrent(value); }
-    private void setDayIndex(int value) { day.setIndex(value); }
-    public void incrementDay(int step) { day.increment(step); }
+    /**
+     * Selected Day has changed, so synchronize values.
+     */
+    public void syncDay() {  }
+
 
     /**
      * Initialize "Spinners" panel.
@@ -396,7 +399,7 @@ public class Model {
         daysOfWeekList.add("Saturday");
         daysOfWeekList.add("Sunday");
 
-        day = new ListSpinner(daysOfWeekList);
+        daySVF = new SpinnerValueFactory.ListSpinnerValueFactory<String>(daysOfWeekList);
     }
 
 

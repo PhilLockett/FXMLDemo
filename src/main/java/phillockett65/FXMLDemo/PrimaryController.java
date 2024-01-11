@@ -379,7 +379,7 @@ public class PrimaryController {
 
         daySpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("daySpinner.Listener(" + newValue + "))");
-            model.setDay(newValue);
+            model.syncDay();
         });
 
     }

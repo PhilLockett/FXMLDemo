@@ -55,7 +55,7 @@ public class DataStore implements Serializable {
 
     private Integer myInteger;
     private Double myDouble;
-    private Integer day;
+    private String day;
 
 
 
@@ -103,8 +103,8 @@ public class DataStore implements Serializable {
     public void setMyInteger(Integer myInteger) { this.myInteger = myInteger; }
     public Double getMyDouble() { return myDouble; }
     public void setMyDouble(Double myDouble) { this.myDouble = myDouble; }
-    public Integer getDay() { return day; }
-    public void setDay(Integer day) { this.day = day; }
+    public String getDay() { return day; }
+    public void setDay(String day) { this.day = day; }
 
 
 
