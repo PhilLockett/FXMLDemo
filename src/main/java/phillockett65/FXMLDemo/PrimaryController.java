@@ -369,12 +369,12 @@ public class PrimaryController {
         
         intSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("intSpinner.Listener(" + newValue + "))");
-            model.setInteger(newValue);
+            model.syncInteger();
         });
 
         doubleSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
             // System.out.println("doubleSpinner.Listener(" + newValue + "))");
-            model.setDouble(newValue);
+            model.syncDouble();
         });
 
         daySpinner.valueProperty().addListener( (v, oldValue, newValue) -> {

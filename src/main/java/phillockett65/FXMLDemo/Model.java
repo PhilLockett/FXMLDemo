@@ -117,8 +117,8 @@ public class Model {
         setDouble(1.0);
         setDayIndex(1);
 
-        setMonthIndex(6);
-        setBestDayIndex(0);
+        setMonth("July");
+        setBestDay("New Year");
         setMyColour(Color.RED);
     }
 
@@ -153,8 +153,8 @@ public class Model {
         if (isThirdRadio())
             data.setThirdRadio();
 
-        data.setMonthIndex(getMonthIndex());
-        data.setBestDayIndex(getBestDayIndex());
+        data.setMonth(getMonth());
+        data.setBestDay(getBestDay());
         data.setMyColour(getMyColour());
 
         data.setMyInteger(getInteger());
@@ -198,8 +198,8 @@ public class Model {
         if (data.isThirdRadio())
             setThirdRadio();
 
-        setMonthIndex(data.getMonthIndex());
-        setBestDayIndex(data.getBestDayIndex());
+        setMonth(data.getMonth());
+        setBestDay(data.getBestDay());
         setMyColour(data.getMyColour());
     
         setInteger(data.getMyInteger());
@@ -295,25 +295,21 @@ public class Model {
      * Support code for "Selections" panel.
      */
 
-    private int monthIndex;
+    private String month;
     private ObservableList<String> monthList = FXCollections.observableArrayList();
 
-    private int bestDayIndex;
+    private String bestDay;
     private ObservableList<String> bestDayList = FXCollections.observableArrayList();
 
     private Color myColour;
 
     public ObservableList<String> getMonthList() { return monthList; }
-    public void setMonth(String value) { monthIndex = monthList.indexOf(value); }
-    public String getMonth() { return monthList.get(monthIndex); }
-    public void setMonthIndex(int value) { monthIndex = value; }
-    public int getMonthIndex() { return monthIndex; }
+    public void setMonth(String value) { month = value; }
+    public String getMonth() { return month; }
 
     public ObservableList<String> getBestDayList() { return bestDayList; }
-    public void setBestDay(String value) { bestDayIndex = bestDayList.indexOf(value); }
-    public String getBestDay() { return bestDayList.get(bestDayIndex); }
-    public void setBestDayIndex(int value) { bestDayIndex = value; }
-    public int getBestDayIndex() { return bestDayIndex; }
+    public void setBestDay(String value) { bestDay = value; }
+    public String getBestDay() { return bestDay; }
 
     public Color getMyColour() { return myColour; }
     public void setMyColour(Color colour) { myColour = colour; }
@@ -369,10 +365,20 @@ public class Model {
     public void setInteger(int value) { integerSVF.setValue(value); }
     public void setDouble(double value) { doubleSVF.setValue(value); }
 
+    /**
+     * Selected Integer has changed, so synchronize values.
+     */
+    public void syncInteger() {  }
+
+    /**
+     * Selected Double has changed, so synchronize values.
+     */
+    public void syncDouble() {  }
+
     public String getDay() { return day.getCurrent(); }
-    public int getDayIndex() { return day.getIndex(); }
+    private int getDayIndex() { return day.getIndex(); }
     public void setDay(String value) { day.setCurrent(value); }
-    public void setDayIndex(int value) { day.setIndex(value); }
+    private void setDayIndex(int value) { day.setIndex(value); }
     public void incrementDay(int step) { day.increment(step); }
 
     /**

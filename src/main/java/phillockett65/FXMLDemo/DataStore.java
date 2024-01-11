@@ -47,8 +47,8 @@ public class DataStore implements Serializable {
 
     private Integer radioSelection;
 
-    private Integer monthIndex;
-    private Integer bestDayIndex;
+    private String month;
+    private String bestDay;
     private Double red;
     private Double green;
     private Double blue;
@@ -88,10 +88,10 @@ public class DataStore implements Serializable {
     public boolean isThirdRadio() { return radioSelection == 3; }
     public void setThirdRadio() { radioSelection =  3; }
 
-    public Integer getMonthIndex() { return monthIndex; }
-    public void setMonthIndex(Integer monthIndex) { this.monthIndex = monthIndex; }
-    public Integer getBestDayIndex() { return bestDayIndex; }
-    public void setBestDayIndex(Integer bestDayIndex) { this.bestDayIndex = bestDayIndex; }
+    public String getMonth() { return month; }
+    public void setMonth(String value) { this.month = value; }
+    public String getBestDay() { return bestDay; }
+    public void setBestDay(String value) { this.bestDay = value; }
     public Color getMyColour() { return Color.color(red, green, blue); }
     public void setMyColour(Color colour) {
         red = colour.getRed();
@@ -123,8 +123,8 @@ public class DataStore implements Serializable {
         System.out.println("secondCheck = " + secondCheck);
         System.out.println("thirdCheck = " + thirdCheck);
         System.out.println("radioSelection = " + radioSelection);
-        System.out.println("monthIndex = " + monthIndex);
-        System.out.println("bestDayIndex = " + bestDayIndex);
+        System.out.println("month = " + month);
+        System.out.println("bestDay = " + bestDay);
         System.out.println("Colour = RGB(" + red + ", " + green + ", " + blue + ")");
         System.out.println("myInteger = " + myInteger);
         System.out.println("myDouble = " + myDouble);
