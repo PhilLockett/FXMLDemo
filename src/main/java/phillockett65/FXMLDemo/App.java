@@ -49,7 +49,7 @@ public class App extends Application {
 
         scene.getStylesheets().add(App.class.getResource("application.css").toExternalForm());
 
-        stage.setTitle("FXML Demo");
+        stage.setTitle("FXML Demo 2.0");
         stage.setOnCloseRequest(e -> Platform.exit());
         stage.resizableProperty().setValue(false);
         stage.setScene(scene);
