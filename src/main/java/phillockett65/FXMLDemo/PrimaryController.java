@@ -128,18 +128,17 @@ public class PrimaryController {
      * Support code for "File Selector" panel.
      */
 
-     @FXML
-     private TextField sourceDocumentTextField;
- 
-     @FXML
-     private Button browseButton;
- 
 
      @FXML
      void browseButtonActionPerformed(ActionEvent event) {
         openFile();
         setStatusMessage("Loaded file: " + model.getSourceFilePath());
      }
+    @FXML
+    private TextField sourceDocumentTextField;
+
+    @FXML
+    private Button browseButton;
 
     /**
      * Use a FileChooser dialogue to select the source PDF file.
@@ -170,7 +169,7 @@ public class PrimaryController {
         return false;
     }
 
-     /**
+    /**
      * Initialize "File Selector" panel.
      */
     private void initializeFileSelector() {
