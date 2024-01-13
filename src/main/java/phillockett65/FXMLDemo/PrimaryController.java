@@ -190,14 +190,14 @@ public class PrimaryController {
     private TextArea myTextArea;
 
     @FXML
-    void myTextFieldKeyTyped(KeyEvent event) {
+    private void myTextFieldKeyTyped(KeyEvent event) {
         // System.out.println("myTextFieldKeyTyped() " + event.toString());
         model.setMyText(myTextField.getText());
     }
 
 
     @FXML
-    void myTextAreaKeyTyped(KeyEvent event) {
+    private void myTextAreaKeyTyped(KeyEvent event) {
         // System.out.println("myTextAreaKeyTyped() " + event.toString());
         model.setMyBigText(myTextArea.getText());
     }
@@ -241,28 +241,28 @@ public class PrimaryController {
     private RadioButton thirdRadioButton;
 
     @FXML
-    void firstCheckBoxActionPerformed(ActionEvent event) {
+    private void firstCheckBoxActionPerformed(ActionEvent event) {
         model.setFirstCheck(firstCheckBox.isSelected());
         final String state = model.isFirstCheck() ? "selected." : "unselected.";
         setStatusMessage("First check box " + state);
     }
 
     @FXML
-    void secondCheckBoxActionPerformed(ActionEvent event) {
+    private void secondCheckBoxActionPerformed(ActionEvent event) {
         model.setSecondCheck(secondCheckBox.isSelected());
         final String state = model.isSecondCheck() ? "selected." : "unselected.";
         setStatusMessage("Second check box " + state);
     }
 
     @FXML
-    void thirdCheckBoxActionPerformed(ActionEvent event) {
+    private void thirdCheckBoxActionPerformed(ActionEvent event) {
         model.setThirdCheck(thirdCheckBox.isSelected());
         final String state = model.isThirdCheck() ? "selected." : "unselected.";
         setStatusMessage("Third check box " + state);
     }
 
     @FXML
-    void myRadioButtonActionPerformed(ActionEvent event) {
+    private void myRadioButtonActionPerformed(ActionEvent event) {
         if (firstRadioButton.isSelected()) {
             model.setFirstRadio();
             setStatusMessage("First radio button selected.");
@@ -308,14 +308,14 @@ public class PrimaryController {
     private ColorPicker myColourPicker;
 
     @FXML
-    void myComboBoxActionPerformed(ActionEvent event) {
+    private void myComboBoxActionPerformed(ActionEvent event) {
         // System.out.println("baseDirectoryComboBoxActionPerformed() " + event.toString());
 
         model.setBestDay(myComboBox.getValue());
     }
 
     @FXML
-    void myColourPickerActionPerformed(ActionEvent event) {
+    private void myColourPickerActionPerformed(ActionEvent event) {
         model.setMyColour(myColourPicker.getValue());
         myTextField.setText(model.getMyColourString());
     }
@@ -396,10 +396,10 @@ public class PrimaryController {
     private Button clearDataButton;
 
     @FXML
-    void clearDataButtonActionPerformed(ActionEvent event) {
         model.defaultSettings();
         syncUI();
         setStatusMessage("Data reset.");
+    private void clearDataButtonActionPerformed(ActionEvent event) {
     }
 
     private void setStatusMessage(String message) {
