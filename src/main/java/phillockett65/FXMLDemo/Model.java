@@ -77,6 +77,7 @@ public class Model {
     public void initialize() {
         // System.out.println("Model initialized.");
 
+        initializeFileSelector();
         initializeTextBoxes();
         initializeCheckBoxes();
         initializeSelections();
@@ -104,6 +105,7 @@ public class Model {
      */
     public void defaultSettings() {
         setSourceFilePath("");
+        setOutputFilePath("");
         setMyText("Hello World");
         setMyBigText("");
 
@@ -136,6 +138,7 @@ public class Model {
         DataStore data = new DataStore();
 
         data.setSourceDocument(getSourceFilePath());
+        data.setOutputDocument(getOutputFilePath());
 
         data.setMyText(getMyText());
         data.setMyBigText(getMyBigText());
@@ -181,6 +184,7 @@ public class Model {
             return false;
 
         setSourceFilePath(data.getSourceDocument());
+        setOutputFilePath(data.getOutputDocument());
 
         setMyText(data.getMyText());
         setMyBigText(data.getMyBigText());
@@ -216,15 +220,16 @@ public class Model {
      */
 
      private String sourceDocument;
+     private String outputFilePath;
 
     /**
-     * Set the file path for the source PDF document.
+     * Set the full file path for the source document.
      * @param text string of the source document file path.
      */
     public void setSourceFilePath(String text) { sourceDocument = text; }
 
     /**
-     * @return the file path for the current source PDF document.
+     * @return the full file path for the current source document.
      */
     public String getSourceFilePath() { return sourceDocument; }
 
@@ -233,6 +238,37 @@ public class Model {
      */
     public boolean isSourceFilePath() { return !sourceDocument.isBlank(); }
 
+    /**
+     * Set the full file path for the generated document.
+     * @param text string of the file name for the generated document.
+     */
+    public void setOutputFilePath(String text) { outputFilePath = text; }
+
+    /**
+     * @return the full file name for the generated document.
+     */
+    public String getOutputFilePath() { return outputFilePath; }
+
+    /**
+     * @return true if a source document has been selected, false otherwise.
+     */
+    public boolean isOutputFilePath() { return !outputFilePath.isBlank(); }
+
+    /**
+     * Save the file.
+     * @return the file path of the saved data.
+     */
+    public boolean saveFile() {
+
+        return true;
+    }
+
+
+    /**
+     * Initialize "File Selector" panel.
+     */
+    private void initializeFileSelector() {
+    }
 
 
     /************************************************************************

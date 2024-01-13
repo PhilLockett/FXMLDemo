@@ -37,6 +37,7 @@ public class DataStore implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String sourceDocument;
+    private String outputDocument;
 
     private String myText;
     private String myBigText;
@@ -68,6 +69,8 @@ public class DataStore implements Serializable {
 
     public String getSourceDocument() { return sourceDocument; }
     public void setSourceDocument(String text) { this.sourceDocument = text; }
+    public String getOutputDocument() { return outputDocument; }
+    public void setOutputDocument(String text) { this.outputDocument = text; }
 
     public String getMyText() { return myText; }
     public void setMyText(String myText) { this.myText = myText; }
@@ -117,6 +120,7 @@ public class DataStore implements Serializable {
       */
       public void dump() {
         System.out.println("sourceDocument = " + sourceDocument);
+        System.out.println("outputDocument = " + outputDocument);
         System.out.println("myText = " + myText);
         System.out.println("myBigText = " + myBigText);
         System.out.println("firstCheck = " + firstCheck);

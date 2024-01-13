@@ -28,6 +28,8 @@ import java.io.File;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -125,20 +127,83 @@ public class PrimaryController {
 
 
     /************************************************************************
+     * Support code for Pull-down Menu structure.
+     */
+
+    @FXML
+    private void fileLoadOnAction() {
+        launchLoadWindow();
+    }
+
+    @FXML
+    private void fileSaveOnAction() {
+        if (model.isOutputFilePath()) {
+            if (model.saveFile())
+                setStatusMessage("Saved to: " + model.getOutputFilePath());
+        }
+        else
+            launchSaveAsWindow();
+    }
+
+    @FXML
+    private void fileSaveAsOnAction() {
+        launchSaveAsWindow();
+    }
+
+    @FXML
+    private void fileCloseOnAction() {
+        model.getStage().close();
+    }
+
+    @FXML
+    private void editClearOnAction() {
+        clearData();
+    }
+
+    @FXML
+    private void helpAboutOnAction() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("About FXML Demo");
+        alert.setHeaderText("FXML Demo 2.0");
+        alert.setContentText("FXML Demo is an application for demonstrating FXML capabilities.");
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Use a file chooser to select a test file.
+     * @return true if a file was selected and loaded, false otherwise.
+     */
+    private boolean launchLoadWindow() {
+        final boolean loaded = openFile();
+        setStatusMessage("Loaded file: " + model.getSourceFilePath());
+
+        return loaded;
+    }
+
+    private boolean launchSaveAsWindow() {
+        final boolean saved = saveAs();
+        setStatusMessage("Saved file: " + model.getOutputFilePath());
+
+        return saved;
+    }
+
+
+    /************************************************************************
      * Support code for "File Selector" panel.
      */
 
-
-     @FXML
-     void browseButtonActionPerformed(ActionEvent event) {
-        openFile();
-        setStatusMessage("Loaded file: " + model.getSourceFilePath());
-     }
     @FXML
     private TextField sourceDocumentTextField;
 
     @FXML
     private Button browseButton;
+
+
+    @FXML
+    private void browseButtonActionPerformed(ActionEvent event) {
+        launchLoadWindow();
+    }
 
     /**
      * Use a FileChooser dialogue to select the source PDF file.
@@ -164,6 +229,37 @@ public class PrimaryController {
             syncUI();
 
             return true;
+        }
+
+        return false;
+    }
+
+    private boolean saveAs() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Text File");
+
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Test File", "*.txt"));
+
+        if (model.isOutputFilePath()) {
+            File current = new File(model.getOutputFilePath());
+            fileChooser.setInitialFileName(current.getName());
+
+            File parent = new File(current.getParent());
+            if (parent.exists())
+                fileChooser.setInitialDirectory(parent);
+        }
+        else
+        if (model.isSourceFilePath()) {
+            File current = new File(model.getSourceFilePath());
+            File parent = new File(current.getParent());
+            if (parent.exists())
+                fileChooser.setInitialDirectory(parent);
+        }
+        File file = fileChooser.showSaveDialog(model.getStage());
+        if (file != null) {
+            model.setOutputFilePath(file.getAbsolutePath());
+
+            return model.saveFile();
         }
 
         return false;
@@ -396,14 +492,21 @@ public class PrimaryController {
     private Button clearDataButton;
 
     @FXML
-        model.defaultSettings();
-        syncUI();
-        setStatusMessage("Data reset.");
     private void clearDataButtonActionPerformed(ActionEvent event) {
+        clearData();
     }
 
     private void setStatusMessage(String message) {
         statusLabel.setText(message);
+    }
+
+    /**
+     * Clear all current data to the default settings then update the UI.
+     */
+    private void clearData() {
+        model.defaultSettings();
+        syncUI();
+        setStatusMessage("Data reset.");
     }
 
     /**

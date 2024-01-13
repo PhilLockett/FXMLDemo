@@ -16,7 +16,7 @@
 }
 
 .tooltip{
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-font-style: italic;
     -fx-font-weight: normal;
     -fx-text-fill: black;
@@ -66,7 +66,7 @@
     -fx-font-weight: bold;
     -fx-background-radius: 12;
 }
-.context-menu{
+.context-menu, .menu-bar{
     -fx-background-color: #9B4642;
     -fx-text-fill: #e8e8e8;
     -fx-font-weight: bold;
