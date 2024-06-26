@@ -213,7 +213,7 @@ public class PrimaryController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Text File");
 
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Test File", "*.txt"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text File", "*.txt"));
 
         if (model.isSourceFilePath()) {
             File current = new File(model.getSourceFilePath());
@@ -238,7 +238,7 @@ public class PrimaryController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Text File");
 
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Test File", "*.txt"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text File", "*.txt"));
 
         if (model.isOutputFilePath()) {
             File current = new File(model.getOutputFilePath());
