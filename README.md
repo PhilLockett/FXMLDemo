@@ -1,6 +1,8 @@
 # FXMLDemo
 'FXMLDemo' is a JavaFX application 'framework' that uses Maven, FXML and CSS.
 
+**USE AT OWN RISK.**
+
 ## Overview
 This project has been set up as a Maven project that uses JavaFX, FXML and 
 CSS to render the GUI. Maven can be run from the command line as shown below.
