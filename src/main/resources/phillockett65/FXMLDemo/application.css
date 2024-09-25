@@ -27,10 +27,6 @@
     -fx-font-weight: bold;
     -fx-background-color: #808080;
 }
-.combo-box{
-    -fx-font-weight: bold;
-    -fx-background-color: #e8e8e8;
-}
 .text-field{
     -fx-text-fill: #808080;
     -fx-font-weight: bold;
@@ -48,8 +44,8 @@
     -fx-background-color: #282828;
 }
 
-.choice-box, .color-picker, .button{
-    -fx-background-color: #9B4642;
+.combo-box, .choice-box, .color-picker, .button{
+    -fx-background-color: linear-gradient(to bottom, #BB6662, #7B2622);
     -fx-text-fill: #e8e8e8;
     -fx-font-weight: bold;
     -fx-background-radius: 12;
@@ -72,14 +68,16 @@
     -fx-font-weight: bold;
 }
 
-.increment-arrow-button, .decrement-arrow-button{
-    -fx-background-color: #9B4642;
+.increment-arrow-button{
+    -fx-background-radius: 0 12 0 0;
+    -fx-background-color: linear-gradient(to bottom, #BB6662, #9B4642);
 }
-.increment-arrow, .decrement-arrow{
+.decrement-arrow-button{
+    -fx-background-radius: 0 0 12 0;
+    -fx-background-color: linear-gradient(to bottom, #9B4642, #7B2622);
+}
+.increment-arrow, .decrement-arrow, .arrow{
     -fx-background-color: #e8e8e8;
-}
-.arrow{
-    -fx-background-color: black;
 }
 
 .imageButton{
@@ -99,16 +97,31 @@
     -fx-background-color: #9B4642;
     -fx-font-weight: bold;
 }
-/*
+
+.list-view{
+    -fx-font-weight: bold;
+}
+.combo-box .text-input{
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(to bottom, #BB6662, #7B2622);
+}
+.combo-box .arrow-button{
+    -fx-background-color: linear-gradient(to bottom, #BB6662, #7B2622);
+}
+
 .list-cell{
     -fx-font-weight: bold;
 }
 
-.list-cell:selected{
-    -fx-text-fill: black;
-    -fx-background-color: #9B4642;
-    -fx-accent: #9B4642;
+.list-cell:hover{
+    -fx-text-fill: #e8e8e8;
+    -fx-background-color: #BB6662;
 }
+.list-cell:selected{
+    -fx-text-fill: #e8e8e8;
+    -fx-background-color: linear-gradient(to bottom, #BB6662, #7B2622);
+}
+/*
 .list-cell:even{
     -fx-background-color: #f8f8f8;
 }
