@@ -1,7 +1,9 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 .root{
-    -fx-background-color: #303030;
+    -main-back-col: #303030;
+    -main-fore-col: #e8e8e8;
+    -fx-background-color: -main-back-col;
     -fx-border-color: silver;
 }
 
@@ -21,20 +23,20 @@
 }
 
 .heading{
-    -fx-text-fill: #e8e8e8;
+    -fx-text-fill: -main-fore-col;
     -fx-font-weight: bold;
     -fx-font-size: 15.5;
 }
 
 .label, .check-box, .radio-button{
-    -fx-text-fill: #e8e8e8;
+    -fx-text-fill: -main-fore-col;
 }
 
 .titled-pane{
-    -fx-text-fill: black;
+    -fx-text-fill: -main-fore-col;
 }
 .title{
-    -fx-background-color: #303030;
+    -fx-background-color: -main-back-col;
     -fx-font-size: 15;
     -fx-font-weight: bold;
 }
@@ -44,7 +46,7 @@
     -fx-font-style: italic;
     -fx-font-weight: normal;
     -fx-text-fill: black;
-    -fx-background-color: #e8e8e8;
+    -fx-background-color: -main-fore-col;
 }
 .text-field:readonly{
     -fx-text-fill: white;
@@ -54,10 +56,10 @@
 .text-field{
     -fx-text-fill: #808080;
     -fx-font-weight: bold;
-    -fx-background-color: #e8e8e8;
+    -fx-background-color: -main-fore-col;
 }
 .text-area{
-    -fx-text-fill: #e8e8e8;
+    -fx-text-fill: -main-fore-col;
 }
 .content{
     -fx-background-color: #080808;
@@ -70,25 +72,25 @@
 
 .combo-box, .choice-box, .color-picker, .button{
     -fx-background-color: linear-gradient(to bottom, #BB6662, #7B2622);
-    -fx-text-fill: #e8e8e8;
+    -fx-text-fill: -main-fore-col;
     -fx-font-weight: bold;
     -fx-background-radius: 12;
 }
 .toggle-button:selected{
     -fx-background-color: green;
-    -fx-text-fill: #e8e8e8;
+    -fx-text-fill: -main-fore-col;
     -fx-font-weight: bold;
     -fx-background-radius: 12;
 }
 .toggle-button{
     -fx-background-color: red;
-    -fx-text-fill: #e8e8e8;
+    -fx-text-fill: -main-fore-col;
     -fx-font-weight: bold;
     -fx-background-radius: 12;
 }
 .context-menu, .menu-bar{
     -fx-background-color: #9B4642;
-    -fx-text-fill: #e8e8e8;
+    -fx-text-fill: -main-fore-col;
     -fx-font-weight: bold;
 }
 
@@ -101,7 +103,7 @@
     -fx-background-color: linear-gradient(to bottom, #9B4642, #7B2622);
 }
 .increment-arrow, .decrement-arrow, .arrow{
-    -fx-background-color: #e8e8e8;
+    -fx-background-color: -main-fore-col;
 }
 
 .imageButton{
@@ -138,11 +140,11 @@
 }
 
 .list-cell:hover{
-    -fx-text-fill: #e8e8e8;
+    -fx-text-fill: -main-fore-col;
     -fx-background-color: #BB6662;
 }
 .list-cell:selected{
-    -fx-text-fill: #e8e8e8;
+    -fx-text-fill: -main-fore-col;
     -fx-background-color: linear-gradient(to bottom, #BB6662, #7B2622);
 }
 /*
@@ -150,6 +152,6 @@
     -fx-background-color: #f8f8f8;
 }
 .list-cell:odd{
-    -fx-background-color: #e8e8e8;
+    -fx-background-color: -main-fore-col;
 }
 */
