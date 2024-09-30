@@ -36,6 +36,9 @@ import javafx.scene.paint.Color;
 public class DataStore implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private double mainX;
+    private double mainY;
+
     private String sourceDocument;
     private String outputDocument;
 
@@ -66,6 +69,11 @@ public class DataStore implements Serializable {
 
     public DataStore() {
     }
+
+    public Double getMainX() { return mainX; }
+    public void setMainX(Double myDouble) { this.mainX = myDouble; }
+    public Double getMainY() { return mainY; }
+    public void setMainY(Double myDouble) { this.mainY = myDouble; }
 
     public String getSourceDocument() { return sourceDocument; }
     public void setSourceDocument(String text) { this.sourceDocument = text; }

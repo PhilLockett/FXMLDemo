@@ -83,9 +83,6 @@ public class Model {
         initializeSelections();
         initializeSpinners();
         initializeStatusLine();
-
-        if (!readData())
-            defaultSettings();
     }
 
     /**
@@ -96,6 +93,8 @@ public class Model {
         // System.out.println("Model init.");
         
         stage = primaryStage;
+        if (!readData())
+            defaultSettings();
     }
 
     public Stage getStage() { return stage; }
@@ -136,6 +135,9 @@ public class Model {
      */
     public boolean writeData() {
         DataStore data = new DataStore();
+
+        data.setMainX(stage.getX());
+        data.setMainY(stage.getY());
 
         data.setSourceDocument(getSourceFilePath());
         data.setOutputDocument(getOutputFilePath());
@@ -182,6 +184,9 @@ public class Model {
         DataStore data = DataStore.readData(getSettingsFile());
         if (data == null)
             return false;
+
+        stage.setX(data.getMainX());
+        stage.setY(data.getMainY());
 
         setSourceFilePath(data.getSourceDocument());
         setOutputFilePath(data.getOutputDocument());
