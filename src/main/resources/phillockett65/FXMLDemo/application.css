@@ -34,7 +34,8 @@
     -fx-text-fill: black;
 }
 .title{
-    -fx-background-color: #e8e8e8;
+    -fx-background-color: #303030;
+    -fx-font-size: 15;
     -fx-font-weight: bold;
 }
 
