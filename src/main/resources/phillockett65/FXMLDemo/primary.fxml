@@ -26,9 +26,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox prefHeight="451.0" prefWidth="642.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="phillockett65.FXMLDemo.PrimaryController">
+<VBox prefWidth="642.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="phillockett65.FXMLDemo.PrimaryController">
    <children>
+      <HBox fx:id="topBar" onMouseDragged="#topBarOnMouseDragged" onMousePressed="#topBarOnMousePressed" prefHeight="32.0" styleClass="top-bar">
+         <children>
+            <Label fx:id="headingLabel" contentDisplay="TEXT_ONLY" styleClass="heading" text="FXML Demo 2.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" top="3.0" />
+               </padding>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="File">
@@ -210,4 +222,7 @@
          </padding>
       </VBox>
    </children>
+   <padding>
+      <Insets right="1.0" />
+   </padding>
 </VBox>

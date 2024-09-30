@@ -29,6 +29,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -52,6 +53,7 @@ public class App extends Application {
         stage.setTitle("FXML Demo 2.0");
         stage.setOnCloseRequest(e -> Platform.exit());
         stage.resizableProperty().setValue(false);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
 
         stage.show();

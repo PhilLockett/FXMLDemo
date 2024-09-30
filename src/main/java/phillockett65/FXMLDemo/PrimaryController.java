@@ -43,6 +43,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -53,7 +59,16 @@ public class PrimaryController {
     private Model model;
 
 
+
     /************************************************************************
+     * General support code.
+     */
+
+     private static final String TOPBARICON = "top-bar-icon";
+
+
+
+     /************************************************************************
      * Support code for the Initialization of the Controller.
      */
 
@@ -74,6 +89,7 @@ public class PrimaryController {
         // System.out.println("PrimaryController initialized.");
         model.initialize();
 
+        initializeTopBar();
         initializeFileSelector();
         initializeTextBoxes();
         initializeCheckBoxes();
@@ -125,6 +141,71 @@ public class PrimaryController {
     }
 
 
+
+    /************************************************************************
+     * Support code for "Top Bar" panel.
+     */
+
+    private double x = 0.0;
+    private double y = 0.0;
+
+    @FXML
+    private HBox topBar;
+
+    @FXML
+    private Label headingLabel;
+
+    @FXML
+    void topBarOnMousePressed(MouseEvent event) {
+        x = event.getSceneX();
+        y = event.getSceneY();
+    }
+
+    @FXML
+    void topBarOnMouseDragged(MouseEvent event) {
+        model.getStage().setX(event.getScreenX() - x);
+        model.getStage().setY(event.getScreenY() - y);
+    }
+ 
+ 
+    private Pane buildCancel() {
+        final double iconSize = 32.0;
+        final double cancelPadding = 0.3;
+
+        Pane cancel = new Pane();
+        cancel.setPrefWidth(iconSize);
+        cancel.setPrefHeight(iconSize);
+        cancel.getStyleClass().add(TOPBARICON);
+
+        double a = iconSize * cancelPadding;
+        double b = iconSize - a;
+        Line line1 = new Line(a, a, b, b);
+        line1.setStroke(Color.WHITE);
+        line1.setStrokeWidth(4.0);
+        line1.setStrokeLineCap(StrokeLineCap.ROUND);
+
+        Line line2 = new Line(a, b, b, a);
+        line2.setStroke(Color.WHITE);
+        line2.setStrokeWidth(4.0);
+        line2.setStrokeLineCap(StrokeLineCap.ROUND);
+
+        cancel.getChildren().addAll(line1, line2);
+
+        cancel.setOnMouseClicked(event -> {
+            model.getStage().close();
+        });
+
+        return cancel;
+    }
+
+
+    /**
+     * Initialize "Top Bar" panel.
+     */
+    private void initializeTopBar() {
+        topBar.getChildren().add(buildCancel());
+    }
+  
 
     /************************************************************************
      * Support code for Pull-down Menu structure.
