@@ -153,9 +153,6 @@ public class PrimaryController {
     private HBox topBar;
 
     @FXML
-    private Label headingLabel;
-
-    @FXML
     void topBarOnMousePressed(MouseEvent event) {
         x = event.getSceneX();
         y = event.getSceneY();
@@ -245,8 +242,8 @@ public class PrimaryController {
     private void helpAboutOnAction() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("About FXML Demo");
-        alert.setHeaderText("FXML Demo 2.0");
-        alert.setContentText("FXML Demo is an application for demonstrating FXML capabilities.");
+        alert.setHeaderText(model.getTitle());
+        alert.setContentText("The FXML Demo application demonstrates FXML capabilities.");
 
         alert.showAndWait();
     }

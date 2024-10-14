@@ -25,9 +25,11 @@ package phillockett65.FXMLDemo;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -48,9 +50,12 @@ public class App extends Application {
         Scene scene = new Scene(root);
         controller = fxmlLoader.getController();
 
+        ObservableList<Image> icons = stage.getIcons();
+        icons.add(new Image(getClass().getResourceAsStream("icon32.png")));
+
         scene.getStylesheets().add(App.class.getResource("application.css").toExternalForm());
 
-        stage.setTitle("FXML Demo 2.0");
+        stage.setTitle("FXML Demo 2.0.1");
         stage.setOnCloseRequest(e -> Platform.exit());
         stage.resizableProperty().setValue(false);
         stage.initStyle(StageStyle.UNDECORATED);

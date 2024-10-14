@@ -98,6 +98,7 @@ public class Model {
     }
 
     public Stage getStage() { return stage; }
+    public String getTitle() { return stage.getTitle(); }
 
     /**
      * Set all attributes to the default values.
