@@ -40,7 +40,6 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    PrimaryController controller;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -48,7 +47,7 @@ public class App extends Application {
 
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
-        controller = fxmlLoader.getController();
+        PrimaryController controller = fxmlLoader.getController();
 
         ObservableList<Image> icons = stage.getIcons();
         icons.add(new Image(getClass().getResourceAsStream("icon32.png")));
@@ -68,7 +67,8 @@ public class App extends Application {
 
     @Override
     public void stop() throws Exception {
-        controller.saveState();
+        // Write current state to disc using the latest version of the DataStore.
+        DataStore1.writeData();
     }
 
     public static void main(String[] args) {

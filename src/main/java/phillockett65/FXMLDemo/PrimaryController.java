@@ -136,19 +136,6 @@ public class PrimaryController {
 
 
     /************************************************************************
-     * Support code for state persistence.
-     */
-
-    /**
-     * Save the current state to disc, called by the application on shut down.
-     */
-    public void saveState() {
-        DataStore1.writeData();
-    }
-
-
-
-    /************************************************************************
      * Support code for "Top Bar" panel.
      */
 
