@@ -73,12 +73,12 @@ public class PrimaryController {
      */
 
     /**
-     * Responsible for constructing the Model and any local objects. Called by 
-     * the FXMLLoader().
+     * Default constructor.
+     * Called by the FXMLLoader().
      */
     public PrimaryController() {
         // System.out.println("PrimaryController constructed.");
-        model = new Model();
+        model = Model.getInstance();
     }
 
     /**

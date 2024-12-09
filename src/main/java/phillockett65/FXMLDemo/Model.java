@@ -34,6 +34,7 @@ public class Model {
 
     private final static String DATAFILE = "Settings.dat";
 
+    private static Model model = new Model();
     private Stage stage;
 
 
@@ -64,11 +65,18 @@ public class Model {
      */
 
     /**
-     * Responsible for constructing the Model and any local objects. Called by 
-     * the controller.
+     * Private default constructor - part of the Singleton Design Pattern.
+     * Called at initialization only, constructs the single private instance.
      */
-    public Model() {
+    private Model() {
+
     }
+
+    /**
+     * Singleton implementation.
+     * @return the only instance of the model.
+     */
+    public static Model getInstance() { return model; }
 
     /**
      * Called by the controller after the constructor to initialise any 
