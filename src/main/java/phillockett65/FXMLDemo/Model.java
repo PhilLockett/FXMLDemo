@@ -1,6 +1,6 @@
 /*  FXMLDemo - a JavaFX application 'framework' that uses Maven, FXML and CSS.
  *
- *  Copyright 2022 Philip Lockett.
+ *  Copyright 2024 Philip Lockett.
  *
  *  This file is part of FXMLDemo.
  *
@@ -139,92 +139,15 @@ public class Model {
      */
 
     /**
-     * Instantiate a DataStore, populate it with data and save it to disc.
-     * @return true if data successfully written to disc, false otherwise.
+     * Call the static DataStore1 method, to read the data from disc.
+     * @return true if data successfully read from disc, false otherwise.
      */
-    public boolean writeData() {
-        DataStore data = new DataStore();
-
-        data.setMainX(stage.getX());
-        data.setMainY(stage.getY());
-
-        data.setSourceDocument(getSourceFilePath());
-        data.setOutputDocument(getOutputFilePath());
-
-        data.setMyText(getMyText());
-        data.setMyBigText(getMyBigText());
-
-        data.setFirstCheck(isFirstCheck());
-        data.setSecondCheck(isSecondCheck());
-        data.setThirdCheck(isThirdCheck());
-
-        if (isFirstRadio())
-            data.setFirstRadio();
-        else
-        if (isSecondRadio())
-            data.setSecondRadio();
-        else
-        if (isThirdRadio())
-            data.setThirdRadio();
-
-        data.setMonth(getMonth());
-        data.setBestDay(getBestDay());
-        data.setMyColour(getMyColour());
-
-        data.setMyInteger(getInteger());
-        data.setMyDouble(getDouble());
-        data.setDay(getDay());
-    
-        if (!data.writeData(getSettingsFile())) {
-            data.dump();
-
-            return false;
+    private boolean readData() {
+        if (DataStore1.readData() == true) {
+            return true;
         }
 
-        return true;
-    }
-
-    /**
-     * Get a DataStore populated with data previously stored to disc and update
-     * the model with the data.
-     * @return true if the model is successfully updated, false otherwise.
-     */
-    public boolean readData() {
-        DataStore data = DataStore.readData(getSettingsFile());
-        if (data == null)
-            return false;
-
-        stage.setX(data.getMainX());
-        stage.setY(data.getMainY());
-
-        setSourceFilePath(data.getSourceDocument());
-        setOutputFilePath(data.getOutputDocument());
-
-        setMyText(data.getMyText());
-        setMyBigText(data.getMyBigText());
-
-        setFirstCheck(data.getFirstCheck());
-        setSecondCheck(data.getSecondCheck());
-        setThirdCheck(data.getThirdCheck());
-
-        if (data.isFirstRadio())
-            setFirstRadio();
-        else
-        if (data.isSecondRadio())
-            setSecondRadio();
-        else
-        if (data.isThirdRadio())
-            setThirdRadio();
-
-        setMonth(data.getMonth());
-        setBestDay(data.getBestDay());
-        setMyColour(data.getMyColour());
-    
-        setInteger(data.getMyInteger());
-        setDouble(data.getMyDouble());
-        setDay(data.getDay());
-    
-        return true;
+        return false;
     }
 
 

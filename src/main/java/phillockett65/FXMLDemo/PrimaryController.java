@@ -1,6 +1,6 @@
 /*  FXMLDemo - a JavaFX application 'framework' that uses Maven, FXML and CSS.
  *
- *  Copyright 2022 Philip Lockett.
+ *  Copyright 2024 Philip Lockett.
  *
  *  This file is part of FXMLDemo.
  *
@@ -112,13 +112,6 @@ public class PrimaryController {
     }
 
     /**
-     * Save the current state to disc, called by the application on shut down.
-     */
-    public void saveState() {
-        model.writeData();
-    }
-
-    /**
      * Synchronise all controls with the model. This should be the last step 
      * in the initialisation.
      */
@@ -138,6 +131,19 @@ public class PrimaryController {
         myChoiceBox.setValue(model.getMonth());
         myComboBox.setValue(model.getBestDay());
         myColourPicker.setValue(model.getMyColour());
+    }
+
+
+
+    /************************************************************************
+     * Support code for state persistence.
+     */
+
+    /**
+     * Save the current state to disc, called by the application on shut down.
+     */
+    public void saveState() {
+        DataStore1.writeData();
     }
 
 
