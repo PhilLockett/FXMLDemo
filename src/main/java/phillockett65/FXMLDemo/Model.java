@@ -27,7 +27,10 @@ package phillockett65.FXMLDemo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 
 public class Model {
@@ -56,6 +59,56 @@ public class Model {
      */
     public String getSettingsFile() {
         return DATAFILE;
+    }
+
+
+    private static final String TOPBARICON = "top-bar-icon";
+ 
+    /**
+     * Builds the cancel button as a Pane.
+     * Does not include the mouse click handler.
+     * @return the Pane that represents the cancel button.
+     */
+    public static Pane buildCancelButton() {
+        final double iconSize = 32.0;
+        final double cancelPadding = 0.3;
+
+        Pane cancel = new Pane();
+        cancel.setPrefWidth(iconSize);
+        cancel.setPrefHeight(iconSize);
+        cancel.getStyleClass().add(TOPBARICON);
+
+        double a = iconSize * cancelPadding;
+        double b = iconSize - a;
+        Line line1 = new Line(a, a, b, b);
+        line1.setStroke(Color.WHITE);
+        line1.setStrokeWidth(4.0);
+        line1.setStrokeLineCap(StrokeLineCap.ROUND);
+
+        Line line2 = new Line(a, b, b, a);
+        line2.setStroke(Color.WHITE);
+        line2.setStrokeWidth(4.0);
+        line2.setStrokeLineCap(StrokeLineCap.ROUND);
+
+        cancel.getChildren().addAll(line1, line2);
+
+        return cancel;
+    }
+
+    /**
+     * Add or remove the unfocussed style from the given pane object.
+     * @param pane to add/remove unfocussed style.
+     * @param style named in .css to define unfocussed style.
+     * @param state is true if we have focus, false otherwise.
+     */
+    public static void styleFocus(Pane pane, String style, boolean state) {
+        if (state) {
+            pane.getStyleClass().remove(style);
+        } else {
+            if (!pane.getStyleClass().contains(style)) {
+                pane.getStyleClass().add(style);
+            }
+        }
     }
 
 
@@ -107,6 +160,10 @@ public class Model {
 
     public Stage getStage() { return stage; }
     public String getTitle() { return stage.getTitle(); }
+
+    public void close() {
+        stage.close();
+    }
 
     /**
      * Set all attributes to the default values.

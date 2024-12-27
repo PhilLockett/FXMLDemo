@@ -46,9 +46,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -58,13 +56,14 @@ public class PrimaryController {
 
     private Model model;
 
+    @FXML
+    private VBox root;
 
 
     /************************************************************************
      * General support code.
      */
 
-     private static final String TOPBARICON = "top-bar-icon";
 
 
 
@@ -109,6 +108,15 @@ public class PrimaryController {
         model.init(primaryStage);
         syncUI();
         setStatusMessage("Ready.");
+    }
+
+    /**
+     * Set the styles based on the focus state.
+     * @param state is true if we have focus, false otherwise.
+     */
+    public void setFocus(boolean state) {
+        Model.styleFocus(root, "unfocussed-root", state);
+        Model.styleFocus(topBar, "unfocussed-bar", state);
     }
 
     /**
@@ -157,43 +165,15 @@ public class PrimaryController {
         model.getStage().setY(event.getScreenY() - y);
     }
  
- 
-    private Pane buildCancel() {
-        final double iconSize = 32.0;
-        final double cancelPadding = 0.3;
-
-        Pane cancel = new Pane();
-        cancel.setPrefWidth(iconSize);
-        cancel.setPrefHeight(iconSize);
-        cancel.getStyleClass().add(TOPBARICON);
-
-        double a = iconSize * cancelPadding;
-        double b = iconSize - a;
-        Line line1 = new Line(a, a, b, b);
-        line1.setStroke(Color.WHITE);
-        line1.setStrokeWidth(4.0);
-        line1.setStrokeLineCap(StrokeLineCap.ROUND);
-
-        Line line2 = new Line(a, b, b, a);
-        line2.setStroke(Color.WHITE);
-        line2.setStrokeWidth(4.0);
-        line2.setStrokeLineCap(StrokeLineCap.ROUND);
-
-        cancel.getChildren().addAll(line1, line2);
-
-        cancel.setOnMouseClicked(event -> {
-            model.getStage().close();
-        });
-
-        return cancel;
-    }
-
 
     /**
      * Initialize "Top Bar" panel.
      */
     private void initializeTopBar() {
-        topBar.getChildren().add(buildCancel());
+        Pane cancel = Model.buildCancelButton();
+        cancel.setOnMouseClicked(event -> model.close());
+
+        topBar.getChildren().add(cancel);
     }
   
 
