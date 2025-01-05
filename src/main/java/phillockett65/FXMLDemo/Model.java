@@ -62,6 +62,7 @@ public class Model {
     }
 
 
+    public static final double TOPBARHEIGHT = 32.0;
     private static final String TOPBARICON = "top-bar-icon";
  
     /**
@@ -70,7 +71,7 @@ public class Model {
      * @return the Pane that represents the cancel button.
      */
     public static Pane buildCancelButton() {
-        final double iconSize = 32.0;
+        final double iconSize = TOPBARHEIGHT;
         final double cancelPadding = 0.3;
 
         Pane cancel = new Pane();
