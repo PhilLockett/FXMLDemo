@@ -52,7 +52,7 @@ public class App extends Application {
         ObservableList<Image> icons = stage.getIcons();
         icons.add(new Image(getClass().getResourceAsStream("icon32.png")));
 
-        // scene.getStylesheets().add(App.class.getResource("application.css").toExternalForm());
+        // root.getStylesheets().add(App.class.getResource("application.css").toExternalForm());
 
         stage.setTitle("FXML Demo 2.0.1");
         stage.setOnCloseRequest(e -> Platform.exit());
