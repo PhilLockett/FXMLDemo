@@ -35,7 +35,9 @@ import javafx.stage.Stage;
 
 public class Model {
 
-    private final static String DATAFILE = "Settings.dat";
+    public static final String DATAFILE = "Settings.dat";
+    public static final double TOPBARHEIGHT = 32.0;
+    private static final String TOPBARICON = "top-bar-icon";
 
     private static Model model = new Model();
     private Stage stage;
@@ -54,16 +56,6 @@ public class Model {
         return (int)(value * 256);
     }
 
-    /**
-     * @return the file path of the settings data file.
-     */
-    public String getSettingsFile() {
-        return DATAFILE;
-    }
-
-
-    public static final double TOPBARHEIGHT = 32.0;
-    private static final String TOPBARICON = "top-bar-icon";
  
     /**
      * Builds the cancel button as a Pane.

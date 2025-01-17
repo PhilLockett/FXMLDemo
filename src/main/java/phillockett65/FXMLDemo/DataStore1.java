@@ -83,11 +83,11 @@ public class DataStore1 extends DataStore {
 
     /**
      * Data exchange from the model to this DataStore.
-     * @param model contains the data.
      * @return true if data successfully pulled from the model, false otherwise.
      */
-    private boolean pull(Model model) {
+    private boolean pull() {
         boolean success = true;
+        Model model = Model.getInstance();
 
         mainX = model.getStage().getX();
         mainY = model.getStage().getY();
@@ -127,11 +127,11 @@ public class DataStore1 extends DataStore {
 
     /**
      * Data exchange from this DataStore to the model.
-     * @param model contains the data.
      * @return true if data successfully pushed to the model, false otherwise.
      */
-    private boolean push(Model model) {
+    private boolean push() {
         boolean success = true;
+        Model model = Model.getInstance();
 
         model.getStage().setX(mainX);
         model.getStage().setY(mainY);
@@ -182,15 +182,14 @@ public class DataStore1 extends DataStore {
      */
     public static boolean writeData() {
         boolean success = false;
-        Model model = Model.getInstance();
 
         DataStore1 store = new DataStore1();
-        store.pull(model);
+        store.pull();
         // store.dump();
 
         ObjectOutputStream objectOutputStream;
         try {
-            objectOutputStream = new ObjectOutputStream(new FileOutputStream(model.getSettingsFile()));
+            objectOutputStream = new ObjectOutputStream(new FileOutputStream(Model.DATAFILE));
 
             objectOutputStream.writeObject(store);
             success = true;
@@ -209,11 +208,10 @@ public class DataStore1 extends DataStore {
      */
     public static boolean readData() {
         boolean success = false;
-        Model model = Model.getInstance();
 
         ObjectInputStream objectInputStream;
         try {
-            objectInputStream = new ObjectInputStream(new FileInputStream(model.getSettingsFile()));
+            objectInputStream = new ObjectInputStream(new FileInputStream(Model.DATAFILE));
 
             DataStore base = (DataStore)objectInputStream.readObject();
             long SVUID = ObjectStreamClass.lookup(base.getClass()).getSerialVersionUID();
@@ -221,7 +219,7 @@ public class DataStore1 extends DataStore {
             DataStore1 store = null;
             if (SVUID == 1) {
                 store = (DataStore1)base;
-                success = store.push(model);
+                success = store.push();
                 // store.dump();
             }
 
