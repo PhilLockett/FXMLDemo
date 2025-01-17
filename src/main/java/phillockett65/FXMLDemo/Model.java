@@ -41,6 +41,8 @@ public class Model {
 
     private static Model model = new Model();
     private Stage stage;
+    private PrimaryController controller;
+
 
 
     /************************************************************************
@@ -143,16 +145,18 @@ public class Model {
      * Called by the controller after the stage has been set. Completes any 
      * initialization dependent on other components being initialized.
      */
-    public void init(Stage primaryStage) {
+    public void init(Stage primaryStage, PrimaryController primaryController) {
         // System.out.println("Model init.");
         
         stage = primaryStage;
+        controller = primaryController;
         if (!readData())
             defaultSettings();
     }
 
     public Stage getStage() { return stage; }
     public String getTitle() { return stage.getTitle(); }
+    public PrimaryController getController() { return controller; }
 
     public void close() {
         stage.close();
