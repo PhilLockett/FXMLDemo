@@ -105,7 +105,7 @@ public class PrimaryController {
      */
     public void init(Stage primaryStage) {
         // System.out.println("PrimaryController init.");
-        model.init(primaryStage);
+        model.init(primaryStage, this);
         syncUI();
         setStatusMessage("Ready.");
     }
@@ -124,7 +124,7 @@ public class PrimaryController {
      * in the initialisation.
      */
     private void syncUI() {
-        sourceDocumentTextField.setText(model.getSourceFilePath());
+        syncSourceDocumentTextField();
         myTextField.setText(model.getMyText());
         myTextArea.setText(model.getMyBigText());
 
@@ -139,6 +139,10 @@ public class PrimaryController {
         myChoiceBox.setValue(model.getMonth());
         myComboBox.setValue(model.getBestDay());
         myColourPicker.setValue(model.getMyColour());
+    }
+
+    public void syncSourceDocumentTextField() {
+        sourceDocumentTextField.setText(model.getSourceFilePath());
     }
 
 
@@ -227,14 +231,18 @@ public class PrimaryController {
      */
     private boolean launchLoadWindow() {
         final boolean loaded = openFile();
-        setStatusMessage("Loaded file: " + model.getSourceFilePath());
+        if (loaded) {
+            setStatusMessage("Loaded file: " + model.getSourceFilePath());
+        }
 
         return loaded;
     }
 
     private boolean launchSaveAsWindow() {
         final boolean saved = saveAs();
-        setStatusMessage("Saved file: " + model.getOutputFilePath());
+        if (saved) {
+            setStatusMessage("Saved file: " + model.getOutputFilePath());
+        }
 
         return saved;
     }
@@ -277,9 +285,14 @@ public class PrimaryController {
         File file = fileChooser.showOpenDialog(model.getStage());
         if (file != null) {
             model.setSourceFilePath(file.getAbsolutePath());
-            syncUI();
+            final boolean success = model.loadFile();
 
-            return true;
+            if (success) {
+                syncSourceDocumentTextField();
+
+                return true;
+            }
+
         }
 
         return false;

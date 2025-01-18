@@ -230,6 +230,16 @@ public class Model {
     public boolean isSourceFilePath() { return !sourceDocument.isBlank(); }
 
     /**
+     * Load the 'sourceDocument' file (un-implemented).
+     * @return true to indicate success.
+     */
+    public boolean loadFile() {
+
+        return true;
+    }
+
+
+    /**
      * Set the full file path for the generated document.
      * @param text string of the file name for the generated document.
      */
@@ -246,8 +256,8 @@ public class Model {
     public boolean isOutputFilePath() { return !outputFilePath.isBlank(); }
 
     /**
-     * Save the file.
-     * @return the file path of the saved data.
+     * Save the 'outputFilePath' file (un-implemented).
+     * @return true to indicate success.
      */
     public boolean saveFile() {
 
