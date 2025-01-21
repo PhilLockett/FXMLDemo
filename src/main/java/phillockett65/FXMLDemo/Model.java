@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 
 public class Model {
 
-    public static final String DATAFILE = "Settings.dat";
+    public static final String DATAFILE = "Settings.ser";
     public static final double TOPBARHEIGHT = 32.0;
     private static final String TOPBARICON = "top-bar-icon";
 
