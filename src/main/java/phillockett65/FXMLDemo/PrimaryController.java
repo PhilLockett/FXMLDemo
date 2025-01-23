@@ -225,26 +225,25 @@ public class PrimaryController {
         alert.showAndWait();
     }
 
-    /**
-     * Use a file chooser to select a test file.
-     * @return true if a file was selected and loaded, false otherwise.
-     */
-    private boolean launchLoadWindow() {
-        final boolean loaded = openFile();
-        if (loaded) {
-            setStatusMessage("Loaded file: " + model.getSourceFilePath());
-        }
-
-        return loaded;
+    private void launchLoadWindow() {
+        openFile();
     }
 
-    private boolean launchSaveAsWindow() {
-        final boolean saved = saveAs();
+    private void launchSaveAsWindow() {
+        saveAs();
+    }
+
+    public void fileLoaded(boolean loaded) {
+        if (loaded) {
+            syncSourceDocumentTextField();
+            setStatusMessage("Loaded file: " + model.getSourceFilePath());
+        }
+    }
+
+    public void fileSaved(boolean saved) {
         if (saved) {
             setStatusMessage("Saved file: " + model.getOutputFilePath());
         }
-
-        return saved;
     }
 
 
@@ -265,10 +264,9 @@ public class PrimaryController {
     }
 
     /**
-     * Use a FileChooser dialogue to select the source PDF file.
-     * @return true if a file is selected, false otherwise.
+     * Use a FileChooser dialogue to select the source text file.
      */
-    private boolean openFile() {
+    private void openFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Text File");
 
@@ -285,20 +283,12 @@ public class PrimaryController {
         File file = fileChooser.showOpenDialog(model.getStage());
         if (file != null) {
             model.setSourceFilePath(file.getAbsolutePath());
-            final boolean success = model.loadFile();
 
-            if (success) {
-                syncSourceDocumentTextField();
-
-                return true;
-            }
-
+            fileLoaded(model.loadFile());
         }
-
-        return false;
     }
 
-    private boolean saveAs() {
+    private void saveAs() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Text File");
 
@@ -323,10 +313,8 @@ public class PrimaryController {
         if (file != null) {
             model.setOutputFilePath(file.getAbsolutePath());
 
-            return model.saveFile();
+            fileSaved(model.saveFile());
         }
-
-        return false;
     }
 
     /**
