@@ -27,6 +27,7 @@ package phillockett65.FXMLDemo;
 import java.io.File;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -49,12 +50,28 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import phillockett65.FXMLDemo.Command.MonthCommand;
+import phillockett65.FXMLDemo.Command.ColourCommand;
+import phillockett65.FXMLDemo.Command.DayCommand;
+import phillockett65.FXMLDemo.Command.DoubleCommand;
+import phillockett65.FXMLDemo.Command.BestDayCommand;
+import phillockett65.FXMLDemo.Command.FirstCheckBoxCommand;
+import phillockett65.FXMLDemo.Command.IntegerCommand;
+import phillockett65.FXMLDemo.Command.Invoker;
+import phillockett65.FXMLDemo.Command.OutputFileCommand;
+import phillockett65.FXMLDemo.Command.SecondCheckBoxCommand;
+import phillockett65.FXMLDemo.Command.SelectRadioCommand;
+import phillockett65.FXMLDemo.Command.SourceFileCommand;
+import phillockett65.FXMLDemo.Command.TextAreaCommand;
+import phillockett65.FXMLDemo.Command.TextFieldCommand;
+import phillockett65.FXMLDemo.Command.ThirdCheckBoxCommand;
 
 
 
 public class PrimaryController {
 
     private Model model;
+    private Invoker invoker;
 
     @FXML
     private VBox root;
@@ -78,6 +95,7 @@ public class PrimaryController {
     public PrimaryController() {
         Debug.info("PrimaryController constructed.");
         model = Model.getInstance();
+        invoker = Invoker.getInstance();
     }
 
     /**
@@ -108,6 +126,34 @@ public class PrimaryController {
         model.init(primaryStage, this);
         syncUI();
         setStatusMessage("Ready.");
+        invoker.clear();
+
+        // Use filter so text based controls do not affect the undo/redo.
+        primaryStage.getScene().addEventFilter(KeyEvent.KEY_TYPED, 
+            new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    final String key = event.getCharacter();
+        
+                    switch ((int)key.charAt(0)) {
+                    case 25:
+                        invoker.redo();
+                        break;
+        
+                    case 26:
+                        invoker.undo();
+                        break;
+        
+                    case 13:
+                        invoker.dump();
+                        break;
+        
+                    default:
+                        break;
+                    }
+                }
+            });
+
     }
 
     /**
@@ -123,7 +169,7 @@ public class PrimaryController {
      * Synchronise all controls with the model. This should be the last step 
      * in the initialisation.
      */
-    private void syncUI() {
+    public void syncUI() {
         syncSourceDocumentTextField();
         myTextField.setText(model.getMyText());
         myTextArea.setText(model.getMyBigText());
@@ -141,7 +187,7 @@ public class PrimaryController {
         myColourPicker.setValue(model.getMyColour());
     }
 
-    public void syncSourceDocumentTextField() {
+    private void syncSourceDocumentTextField() {
         sourceDocumentTextField.setText(model.getSourceFilePath());
     }
 
@@ -282,9 +328,8 @@ public class PrimaryController {
 
         File file = fileChooser.showOpenDialog(model.getStage());
         if (file != null) {
-            model.setSourceFilePath(file.getAbsolutePath());
-
-            fileLoaded(model.loadFile());
+            SourceFileCommand command = new SourceFileCommand(file.getAbsolutePath());
+            invoker.invoke(command);
         }
     }
 
@@ -311,9 +356,8 @@ public class PrimaryController {
         }
         File file = fileChooser.showSaveDialog(model.getStage());
         if (file != null) {
-            model.setOutputFilePath(file.getAbsolutePath());
-
-            fileSaved(model.saveFile());
+            OutputFileCommand command = new OutputFileCommand(file.getAbsolutePath());
+            invoker.invoke(command);
         }
     }
 
@@ -339,15 +383,17 @@ public class PrimaryController {
 
     @FXML
     private void myTextFieldKeyTyped(KeyEvent event) {
-        model.setMyText(myTextField.getText());
         Debug.info("myTextFieldKeyTyped() " + event.toString());
+        TextFieldCommand command = new TextFieldCommand(myTextField.getText());
+        invoker.invoke(command);
     }
 
 
     @FXML
     private void myTextAreaKeyTyped(KeyEvent event) {
-        model.setMyBigText(myTextArea.getText());
         Debug.info("myTextAreaKeyTyped() " + event.toString());
+        TextAreaCommand command = new TextAreaCommand(myTextArea.getText());
+        invoker.invoke(command);
     }
 
     /**
@@ -390,41 +436,38 @@ public class PrimaryController {
 
     @FXML
     private void firstCheckBoxActionPerformed(ActionEvent event) {
-        model.setFirstCheck(firstCheckBox.isSelected());
-        final String state = model.isFirstCheck() ? "selected." : "unselected.";
-        setStatusMessage("First check box " + state);
+        FirstCheckBoxCommand command = new FirstCheckBoxCommand(firstCheckBox.isSelected());
+        invoker.invoke(command);
     }
 
     @FXML
     private void secondCheckBoxActionPerformed(ActionEvent event) {
-        model.setSecondCheck(secondCheckBox.isSelected());
-        final String state = model.isSecondCheck() ? "selected." : "unselected.";
-        setStatusMessage("Second check box " + state);
+        SecondCheckBoxCommand command = new SecondCheckBoxCommand(secondCheckBox.isSelected());
+        invoker.invoke(command);
     }
 
     @FXML
     private void thirdCheckBoxActionPerformed(ActionEvent event) {
-        model.setThirdCheck(thirdCheckBox.isSelected());
-        final String state = model.isThirdCheck() ? "selected." : "unselected.";
-        setStatusMessage("Third check box " + state);
+        ThirdCheckBoxCommand command = new ThirdCheckBoxCommand(thirdCheckBox.isSelected());
+        invoker.invoke(command);
     }
 
     @FXML
     private void myRadioButtonActionPerformed(ActionEvent event) {
+        int index = 0;
         if (firstRadioButton.isSelected()) {
-            model.setFirstRadio();
-            setStatusMessage("First radio button selected.");
+            index =  1;
         }
         else
         if (secondRadioButton.isSelected()) {
-            model.setSecondRadio();
-            setStatusMessage("Second radio button selected.");
+            index =  2;
         }
         else
         if (thirdRadioButton.isSelected()) {
-            model.setThirdRadio();
-            setStatusMessage("Third radio button selected.");
+            index =  3;
         }
+        SelectRadioCommand command = new SelectRadioCommand(index);
+        invoker.invoke(command);
     }
 
     /**
@@ -459,14 +502,16 @@ public class PrimaryController {
     private void myComboBoxActionPerformed(ActionEvent event) {
         Debug.info("myComboBoxActionPerformed() " + myComboBox.getValue());
 
-        model.setBestDay(myComboBox.getValue());
+        BestDayCommand command = new BestDayCommand(myComboBox.getValue());
+        invoker.invoke(command);
     }
 
     @FXML
     private void myColourPickerActionPerformed(ActionEvent event) {
-        model.setMyColour(myColourPicker.getValue());
-        myTextField.setText(model.getMyColourString());
         Debug.info("myColourPickerActionPerformed() " + myColourPicker.getValue());
+
+        ColourCommand command = new ColourCommand(myColourPicker.getValue());
+        invoker.invoke(command);
     }
 
     /**
@@ -477,8 +522,10 @@ public class PrimaryController {
         myComboBox.setItems(model.getBestDayList());
 
         myChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
-            model.setMonth(newValue);
             Debug.info("myChoiceBox..selectedItemProperty() " + oldValue + " -> " + newValue);
+
+            MonthCommand command = new MonthCommand(oldValue, newValue);
+            invoker.invoke(command);
         });
 
         myChoiceBox.setTooltip(new Tooltip("Select from a choice box"));
@@ -517,18 +564,24 @@ public class PrimaryController {
         daySpinner.setTooltip(new Tooltip("Select your favourite day"));
         
         intSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            model.syncInteger();
             Debug.info("intSpinner.Listener(" + newValue + ")");
+
+            IntegerCommand command = new IntegerCommand(oldValue, newValue);
+            invoker.invoke(command);
         });
 
         doubleSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            model.syncDouble();
             Debug.info("doubleSpinner.Listener(" + newValue + ")");
+
+            DoubleCommand command = new DoubleCommand(oldValue, newValue);
+            invoker.invoke(command);
         });
 
         daySpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            model.syncDay();
             Debug.info("daySpinner.Listener(" + newValue + ")");
+
+            DayCommand command = new DayCommand(oldValue, newValue);
+            invoker.invoke(command);
         });
 
     }
@@ -550,7 +603,7 @@ public class PrimaryController {
         clearData();
     }
 
-    private void setStatusMessage(String message) {
+    public void setStatusMessage(String message) {
         statusLabel.setText(message);
     }
 

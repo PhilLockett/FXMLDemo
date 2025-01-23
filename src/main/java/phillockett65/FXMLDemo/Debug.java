@@ -19,7 +19,7 @@
  */
 
 /*
- * Debug is the singleton class that manages debug output.
+ * Debug is the static class that manages debug output.
  */
 package phillockett65.FXMLDemo;
 
@@ -33,8 +33,6 @@ public class Debug {
     private static final int INFO = 4;
 
     private static final int LEVEL = NONE;
-
-    private static Debug debug = new Debug();
 
 
 
@@ -75,12 +73,6 @@ public class Debug {
      */
     private Debug() {
     }
-
-    /**
-     * Singleton implementation.
-     * @return the only instance of the model.
-     */
-    public static Debug getInstance() { return debug; }
 
 
 

@@ -162,6 +162,14 @@ public class Model {
         stage.close();
     }
 
+    public void syncUI() {
+        controller.syncUI();
+    }
+
+    public void setStatusMessage(String message) {
+        controller.setStatusMessage(message);
+    }
+
     /**
      * Set all attributes to the default values.
      */
@@ -332,13 +340,13 @@ public class Model {
      * Support code for "Selections" panel.
      */
 
-    private String month;
+    private String month = "";
     private ObservableList<String> monthList = FXCollections.observableArrayList();
 
-    private String bestDay;
+    private String bestDay = "";
     private ObservableList<String> bestDayList = FXCollections.observableArrayList();
 
-    private Color myColour;
+    private Color myColour = Color.WHITE;
 
     public ObservableList<String> getMonthList() { return monthList; }
     public void setMonth(String value) { month = value; }
