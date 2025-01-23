@@ -185,7 +185,7 @@ public class DataStore1 extends DataStore {
 
         DataStore1 store = new DataStore1();
         store.pull();
-        // store.dump();
+        store.dump();
 
         ObjectOutputStream objectOutputStream;
         try {
@@ -195,7 +195,7 @@ public class DataStore1 extends DataStore {
             success = true;
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
+            Debug.critical(e.getMessage());
         }
 
         return success;
@@ -220,13 +220,13 @@ public class DataStore1 extends DataStore {
             if (SVUID == 1) {
                 store = (DataStore1)base;
                 success = store.push();
-                // store.dump();
+                store.dump();
             }
 
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            Debug.critical(e.getMessage());
         } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            Debug.critical(e.getMessage());
         }
 
         return success;
@@ -242,20 +242,20 @@ public class DataStore1 extends DataStore {
       * Print data store on the command line.
       */
       public void dump() {
-        System.out.println("sourceDocument = " + sourceDocument);
-        System.out.println("outputDocument = " + outputDocument);
-        System.out.println("myText = " + myText);
-        System.out.println("myBigText = " + myBigText);
-        System.out.println("firstCheck = " + firstCheck);
-        System.out.println("secondCheck = " + secondCheck);
-        System.out.println("thirdCheck = " + thirdCheck);
-        System.out.println("radioSelection = " + radioSelection);
-        System.out.println("month = " + month);
-        System.out.println("bestDay = " + bestDay);
-        System.out.println("Colour = RGB(" + red + ", " + green + ", " + blue + ")");
-        System.out.println("myInteger = " + myInteger);
-        System.out.println("myDouble = " + myDouble);
-        System.out.println("day = " + day);
+        Debug.info("sourceDocument = " + sourceDocument);
+        Debug.info("outputDocument = " + outputDocument);
+        Debug.info("myText = " + myText);
+        Debug.info("myBigText = " + myBigText);
+        Debug.info("firstCheck = " + firstCheck);
+        Debug.info("secondCheck = " + secondCheck);
+        Debug.info("thirdCheck = " + thirdCheck);
+        Debug.info("radioSelection = " + radioSelection);
+        Debug.info("month = " + month);
+        Debug.info("bestDay = " + bestDay);
+        Debug.info("Colour = RGB(" + red + ", " + green + ", " + blue + ")");
+        Debug.info("myInteger = " + myInteger);
+        Debug.info("myDouble = " + myDouble);
+        Debug.info("day = " + day);
     }
 
 

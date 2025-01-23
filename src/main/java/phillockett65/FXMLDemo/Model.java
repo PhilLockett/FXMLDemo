@@ -131,7 +131,7 @@ public class Model {
      * objects after the controls have been initialised.
      */
     public void initialize() {
-        // System.out.println("Model initialized.");
+        Debug.info("Model initialized.");
 
         initializeFileSelector();
         initializeTextBoxes();
@@ -146,7 +146,7 @@ public class Model {
      * initialization dependent on other components being initialized.
      */
     public void init(Stage primaryStage, PrimaryController primaryController) {
-        // System.out.println("Model init.");
+        Debug.info("Model init.");
         
         stage = primaryStage;
         controller = primaryController;

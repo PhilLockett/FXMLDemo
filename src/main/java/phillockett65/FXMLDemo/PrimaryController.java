@@ -76,7 +76,7 @@ public class PrimaryController {
      * Called by the FXMLLoader().
      */
     public PrimaryController() {
-        // System.out.println("PrimaryController constructed.");
+        Debug.info("PrimaryController constructed.");
         model = Model.getInstance();
     }
 
@@ -85,7 +85,7 @@ public class PrimaryController {
      * the constructor to initialise all the controls.
      */
     @FXML public void initialize() {
-        // System.out.println("PrimaryController initialized.");
+        Debug.info("PrimaryController initialized.");
         model.initialize();
 
         initializeTopBar();
@@ -104,7 +104,7 @@ public class PrimaryController {
      * @param mainController used to call the centralized controller.
      */
     public void init(Stage primaryStage) {
-        // System.out.println("PrimaryController init.");
+        Debug.info("PrimaryController init.");
         model.init(primaryStage, this);
         syncUI();
         setStatusMessage("Ready.");
@@ -339,15 +339,15 @@ public class PrimaryController {
 
     @FXML
     private void myTextFieldKeyTyped(KeyEvent event) {
-        // System.out.println("myTextFieldKeyTyped() " + event.toString());
         model.setMyText(myTextField.getText());
+        Debug.info("myTextFieldKeyTyped() " + event.toString());
     }
 
 
     @FXML
     private void myTextAreaKeyTyped(KeyEvent event) {
-        // System.out.println("myTextAreaKeyTyped() " + event.toString());
         model.setMyBigText(myTextArea.getText());
+        Debug.info("myTextAreaKeyTyped() " + event.toString());
     }
 
     /**
@@ -457,7 +457,7 @@ public class PrimaryController {
 
     @FXML
     private void myComboBoxActionPerformed(ActionEvent event) {
-        // System.out.println("baseDirectoryComboBoxActionPerformed() " + event.toString());
+        Debug.info("myComboBoxActionPerformed() " + myComboBox.getValue());
 
         model.setBestDay(myComboBox.getValue());
     }
@@ -466,6 +466,7 @@ public class PrimaryController {
     private void myColourPickerActionPerformed(ActionEvent event) {
         model.setMyColour(myColourPicker.getValue());
         myTextField.setText(model.getMyColourString());
+        Debug.info("myColourPickerActionPerformed() " + myColourPicker.getValue());
     }
 
     /**
@@ -477,6 +478,7 @@ public class PrimaryController {
 
         myChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
             model.setMonth(newValue);
+            Debug.info("myChoiceBox..selectedItemProperty() " + oldValue + " -> " + newValue);
         });
 
         myChoiceBox.setTooltip(new Tooltip("Select from a choice box"));
@@ -515,18 +517,18 @@ public class PrimaryController {
         daySpinner.setTooltip(new Tooltip("Select your favourite day"));
         
         intSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            // System.out.println("intSpinner.Listener(" + newValue + "))");
             model.syncInteger();
+            Debug.info("intSpinner.Listener(" + newValue + ")");
         });
 
         doubleSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            // System.out.println("doubleSpinner.Listener(" + newValue + "))");
             model.syncDouble();
+            Debug.info("doubleSpinner.Listener(" + newValue + ")");
         });
 
         daySpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            // System.out.println("daySpinner.Listener(" + newValue + "))");
             model.syncDay();
+            Debug.info("daySpinner.Listener(" + newValue + ")");
         });
 
     }
