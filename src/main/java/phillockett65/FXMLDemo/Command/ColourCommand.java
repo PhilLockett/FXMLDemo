@@ -25,7 +25,7 @@
 package phillockett65.FXMLDemo.Command;
 
 import javafx.scene.paint.Color;
-import phillockett65.FXMLDemo.Debug;
+import phillockett65.Debug.Debug;
 import phillockett65.FXMLDemo.Model;
 
 public class ColourCommand implements Command {

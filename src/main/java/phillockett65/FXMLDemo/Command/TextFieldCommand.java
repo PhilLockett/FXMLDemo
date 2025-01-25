@@ -23,7 +23,7 @@
  */
 package phillockett65.FXMLDemo.Command;
 
-import phillockett65.FXMLDemo.Debug;
+import phillockett65.Debug.Debug;
 import phillockett65.FXMLDemo.Model;
 
 public class TextFieldCommand implements Command {

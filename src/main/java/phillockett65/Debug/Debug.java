@@ -21,7 +21,7 @@
 /*
  * Debug is the static class that manages debug output.
  */
-package phillockett65.FXMLDemo;
+package phillockett65.Debug;
 
 
 public class Debug {

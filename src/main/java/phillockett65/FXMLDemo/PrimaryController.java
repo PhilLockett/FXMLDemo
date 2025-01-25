@@ -50,6 +50,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import phillockett65.Debug.Debug;
 import phillockett65.FXMLDemo.Command.MonthCommand;
 import phillockett65.FXMLDemo.Command.ColourCommand;
 import phillockett65.FXMLDemo.Command.DayCommand;

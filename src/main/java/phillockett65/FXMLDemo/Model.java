@@ -32,6 +32,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
+import phillockett65.Debug.Debug;
 
 public class Model {
 
