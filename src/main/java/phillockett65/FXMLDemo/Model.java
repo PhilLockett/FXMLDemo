@@ -36,6 +36,9 @@ import phillockett65.Debug.Debug;
 
 public class Model {
 
+    // Debug delta used to adjust the local logging level.
+    private static final int DD = 0;
+
     public static final String DATAFILE = "Settings.ser";
     public static final double TOPBARHEIGHT = 32.0;
     private static final String TOPBARICON = "top-bar-icon";
@@ -132,7 +135,7 @@ public class Model {
      * objects after the controls have been initialised.
      */
     public void initialize() {
-        Debug.info("Model initialized.");
+        Debug.trace(DD, "Model initialized.");
 
         initializeFileSelector();
         initializeTextBoxes();
@@ -147,7 +150,7 @@ public class Model {
      * initialization dependent on other components being initialized.
      */
     public void init(Stage primaryStage, PrimaryController primaryController) {
-        Debug.info("Model init.");
+        Debug.trace(DD, "Model init.");
         
         stage = primaryStage;
         controller = primaryController;

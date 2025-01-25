@@ -28,6 +28,9 @@ import phillockett65.FXMLDemo.Model;
 
 public class SelectRadioCommand implements Command {
 
+    // Debug delta used to adjust the local logging level.
+    private static final int DD = 0;
+
     private final String className = "SelectRadioCommand";
     private final int originalIndex;
     private int newIndex;
@@ -81,13 +84,13 @@ public class SelectRadioCommand implements Command {
 
     @Override
     public void undo() {
-        Debug.info("undo " + className);
+        Debug.trace(DD, "undo " + className);
         setRadio(originalIndex);
     }
 
     @Override
     public void redo() {
-        Debug.info("redo " + className);
+        Debug.trace(DD, "redo " + className);
         execute();
     }
 

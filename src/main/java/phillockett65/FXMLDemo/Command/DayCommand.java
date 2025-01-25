@@ -28,6 +28,9 @@ import phillockett65.FXMLDemo.Model;
 
 public class DayCommand implements Command {
 
+    // Debug delta used to adjust the local logging level.
+    private static final int DD = 0;
+
     private final String className = "DayCommand";
     private final String originalValue;
     private String newValue;
@@ -44,13 +47,13 @@ public class DayCommand implements Command {
 
     @Override
     public void undo() {
-        Debug.info("undo " + className);
+        Debug.trace(DD, "undo " + className);
         Model.getInstance().setDay(originalValue);
     }
 
     @Override
     public void redo() {
-        Debug.info("redo " + className);
+        Debug.trace(DD, "redo " + className);
         execute();
     }
 

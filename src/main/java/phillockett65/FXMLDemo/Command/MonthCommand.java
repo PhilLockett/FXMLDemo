@@ -28,6 +28,9 @@ import phillockett65.FXMLDemo.Model;
 
 public class MonthCommand implements Command {
 
+    // Debug delta used to adjust the local logging level.
+    private static final int DD = 0;
+
     private final String className = "MonthCommand";
     private final String originalValue;
     private String newValue;
@@ -44,7 +47,7 @@ public class MonthCommand implements Command {
 
     @Override
     public void undo() {
-        Debug.info("undo " + className);
+        Debug.trace(DD, "undo " + className);
         Model model = Model.getInstance();
 
         model.setMonth(originalValue);
@@ -53,7 +56,7 @@ public class MonthCommand implements Command {
 
     @Override
     public void redo() {
-        Debug.info("redo " + className);
+        Debug.trace(DD, "redo " + className);
         execute();
         Model.getInstance().syncUI();
     }

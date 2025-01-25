@@ -37,6 +37,9 @@ import phillockett65.Debug.Debug;
 public class DataStore1 extends DataStore {
     private static final long serialVersionUID = 1L;
 
+    // Debug delta used to adjust the local logging level.
+    private static final int DD = 0;
+
     private double mainX;
     private double mainY;
 
@@ -196,7 +199,7 @@ public class DataStore1 extends DataStore {
             success = true;
         } catch (IOException e) {
             e.printStackTrace();
-            Debug.critical(e.getMessage());
+            Debug.critical(DD, e.getMessage());
         }
 
         return success;
@@ -225,9 +228,9 @@ public class DataStore1 extends DataStore {
             }
 
         } catch (IOException e) {
-            Debug.critical(e.getMessage());
+            Debug.critical(DD, e.getMessage());
         } catch (ClassNotFoundException e) {
-            Debug.critical(e.getMessage());
+            Debug.critical(DD, e.getMessage());
         }
 
         return success;
@@ -243,20 +246,27 @@ public class DataStore1 extends DataStore {
       * Print data store on the command line.
       */
       public void dump() {
-        Debug.info("sourceDocument = " + sourceDocument);
-        Debug.info("outputDocument = " + outputDocument);
-        Debug.info("myText = " + myText);
-        Debug.info("myBigText = " + myBigText);
-        Debug.info("firstCheck = " + firstCheck);
-        Debug.info("secondCheck = " + secondCheck);
-        Debug.info("thirdCheck = " + thirdCheck);
-        Debug.info("radioSelection = " + radioSelection);
-        Debug.info("month = " + month);
-        Debug.info("bestDay = " + bestDay);
-        Debug.info("Colour = RGB(" + red + ", " + green + ", " + blue + ")");
-        Debug.info("myInteger = " + myInteger);
-        Debug.info("myDouble = " + myDouble);
-        Debug.info("day = " + day);
+        Debug.info(DD, "");
+        Debug.info(DD, "DataStore:");
+        Debug.info(DD, "sourceDocument = " + sourceDocument);
+        Debug.info(DD, "outputDocument = " + outputDocument);
+        Debug.info(DD, "");
+        Debug.info(DD, "myText = " + myText);
+        Debug.info(DD, "myBigText = " + myBigText);
+        Debug.info(DD, "");
+        Debug.info(DD, "firstCheck = " + firstCheck);
+        Debug.info(DD, "secondCheck = " + secondCheck);
+        Debug.info(DD, "thirdCheck = " + thirdCheck);
+        Debug.info(DD, "radioSelection = " + radioSelection);
+        Debug.info(DD, "");
+        Debug.info(DD, "month = " + month);
+        Debug.info(DD, "bestDay = " + bestDay);
+        Debug.info(DD, "Colour = RGB(" + red + ", " + green + ", " + blue + ")");
+        Debug.info(DD, "");
+        Debug.info(DD, "myInteger = " + myInteger);
+        Debug.info(DD, "myDouble = " + myDouble);
+        Debug.info(DD, "day = " + day);
+        Debug.info(DD, "");
     }
 
 

@@ -28,6 +28,9 @@ import phillockett65.FXMLDemo.Model;
 
 public class IntegerCommand implements Command {
 
+    // Debug delta used to adjust the local logging level.
+    private static final int DD = 0;
+
     private final String className = "IntegerCommand";
     private final int originalValue;
     private int newValue;
@@ -44,13 +47,13 @@ public class IntegerCommand implements Command {
 
     @Override
     public void undo() {
-        Debug.info("undo " + className);
+        Debug.trace(DD, "undo " + className);
         Model.getInstance().setInteger(originalValue);
     }
 
     @Override
     public void redo() {
-        Debug.info("redo " + className);
+        Debug.trace(DD, "redo " + className);
         execute();
     }
 

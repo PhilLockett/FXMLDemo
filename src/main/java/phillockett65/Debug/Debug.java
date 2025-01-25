@@ -1,21 +1,21 @@
-/*  FXMLDemo - a JavaFX application 'framework' that uses Maven, FXML and CSS.
+/*  Debug - a JavaFX package for logging diagnostics.
  *
  *  Copyright 2025 Philip Lockett.
  *
- *  This file is part of FXMLDemo.
+ *  This file is part of Debug.
  *
- *  FXMLDemo is free software: you can redistribute it and/or modify
+ *  Debug is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  FXMLDemo is distributed in the hope that it will be useful,
+ *  Debug is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with FXMLDemo.  If not, see <https://www.gnu.org/licenses/>.
+ *  along with Debug.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /*
@@ -30,9 +30,12 @@ public class Debug {
     private static final int CRITICAL = 1;
     private static final int MAJOR = 2;
     private static final int MINOR = 3;
-    private static final int INFO = 4;
+    private static final int TRACE = 4;
+    private static final int INFO = 5;
+    private static final int ALL = 6;
 
-    private static final int LEVEL = NONE;
+    // Logging level for entire application.
+    private static final int LEVEL = MINOR;
 
 
 
@@ -45,15 +48,28 @@ public class Debug {
             case CRITICAL:  return "Critical error";
             case MAJOR:     return "Major error";
             case MINOR:     return "Minor error";
-            case INFO:      return "Information";
+            case TRACE:     return "Trace";
+            case INFO:      return "Info";
         }
 
         return "";
     }
 
-    private static void display(int level, String line) {
-        if (level <= LEVEL) {
-            final String message = pre(level) + ": " + line;
+    private static String formMessage(int level, String line) {
+        if (line == null) {
+            return "";
+        }
+
+        if (line.isEmpty()) {
+            return "";
+        }
+
+        return pre(level) + ": " + line;
+    }
+
+    private static void display(int level, int delta, String line) {
+        if (level-delta <= LEVEL) {
+            final String message = formMessage(level, line);
             if (level <= MAJOR)
                 System.err.println(message);
             else
@@ -80,10 +96,55 @@ public class Debug {
      * Support code for static public interface.
      */
 
-    public static void critical(String line) { display(CRITICAL, line); }
-    public static void major(String line) { display(MAJOR, line); }
-    public static void minor(String line) { display(MINOR, line); }
-    public static void info(String line) { display(INFO, line); }
+    /**
+     * Log Critical error messsage.
+     * 
+     * @param delta adjustment, +ve values increase the amount of debug 
+     *              generated, whereas -ve values decrease it.
+     * @param line to log
+     */
+    public static void critical(int delta, String line) {
+        display(CRITICAL, delta, line);
+    }
 
+    /**
+     * Log Major error messsage.
+     * @param delta adjustment, +ve values increase the amount of debug 
+     *              generated, whereas -ve values decrease it.
+     * @param line to log
+     */
+    public static void major(int delta, String line) {
+        display(MAJOR, delta, line);
+    }
+
+    /**
+     * Log Minor error messsage.
+     * @param delta adjustment, +ve values increase the amount of debug 
+     *              generated, whereas -ve values decrease it.
+     * @param line to log
+     */
+    public static void minor(int delta, String line) {
+        display(MINOR, delta, line);
+    }
+
+    /**
+     * Log Trace messsage.
+     * @param delta adjustment, +ve values increase the amount of debug 
+     *              generated, whereas -ve values decrease it.
+     * @param line to log
+     */
+    public static void trace(int delta, String line) {
+        display(TRACE, delta, line);
+    }
+
+    /**
+     * Log Informational messsage.
+     * @param delta adjustment, +ve values increase the amount of debug 
+     *              generated, whereas -ve values decrease it.
+     * @param line to log
+     */
+    public static void info(int delta, String line) {
+        display(INFO, delta, line);
+    }
 
 }

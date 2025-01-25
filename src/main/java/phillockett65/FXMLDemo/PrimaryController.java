@@ -67,9 +67,10 @@ import phillockett65.FXMLDemo.Command.TextAreaCommand;
 import phillockett65.FXMLDemo.Command.TextFieldCommand;
 import phillockett65.FXMLDemo.Command.ThirdCheckBoxCommand;
 
-
-
 public class PrimaryController {
+
+    // Debug delta used to adjust the local logging level.
+    private static final int DD = 0;
 
     private Model model;
     private Invoker invoker;
@@ -94,7 +95,7 @@ public class PrimaryController {
      * Called by the FXMLLoader().
      */
     public PrimaryController() {
-        Debug.info("PrimaryController constructed.");
+        Debug.trace(DD, "PrimaryController constructed.");
         model = Model.getInstance();
         invoker = Invoker.getInstance();
     }
@@ -104,7 +105,7 @@ public class PrimaryController {
      * the constructor to initialise all the controls.
      */
     @FXML public void initialize() {
-        Debug.info("PrimaryController initialized.");
+        Debug.trace(DD, "PrimaryController initialized.");
         model.initialize();
 
         initializeTopBar();
@@ -123,7 +124,7 @@ public class PrimaryController {
      * @param mainController used to call the centralized controller.
      */
     public void init(Stage primaryStage) {
-        Debug.info("PrimaryController init.");
+        Debug.trace(DD, "PrimaryController init.");
         model.init(primaryStage, this);
         syncUI();
         setStatusMessage("Ready.");
@@ -384,7 +385,7 @@ public class PrimaryController {
 
     @FXML
     private void myTextFieldKeyTyped(KeyEvent event) {
-        Debug.info("myTextFieldKeyTyped() " + event.toString());
+        Debug.trace(DD, "myTextFieldKeyTyped() " + event.toString());
         TextFieldCommand command = new TextFieldCommand(myTextField.getText());
         invoker.invoke(command);
     }
@@ -392,7 +393,7 @@ public class PrimaryController {
 
     @FXML
     private void myTextAreaKeyTyped(KeyEvent event) {
-        Debug.info("myTextAreaKeyTyped() " + event.toString());
+        Debug.trace(DD, "myTextAreaKeyTyped() " + event.toString());
         TextAreaCommand command = new TextAreaCommand(myTextArea.getText());
         invoker.invoke(command);
     }
@@ -501,7 +502,7 @@ public class PrimaryController {
 
     @FXML
     private void myComboBoxActionPerformed(ActionEvent event) {
-        Debug.info("myComboBoxActionPerformed() " + myComboBox.getValue());
+        Debug.trace(DD, "myComboBoxActionPerformed() " + myComboBox.getValue());
 
         BestDayCommand command = new BestDayCommand(myComboBox.getValue());
         invoker.invoke(command);
@@ -509,7 +510,7 @@ public class PrimaryController {
 
     @FXML
     private void myColourPickerActionPerformed(ActionEvent event) {
-        Debug.info("myColourPickerActionPerformed() " + myColourPicker.getValue());
+        Debug.trace(DD, "myColourPickerActionPerformed() " + myColourPicker.getValue());
 
         ColourCommand command = new ColourCommand(myColourPicker.getValue());
         invoker.invoke(command);
@@ -523,7 +524,7 @@ public class PrimaryController {
         myComboBox.setItems(model.getBestDayList());
 
         myChoiceBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
-            Debug.info("myChoiceBox..selectedItemProperty() " + oldValue + " -> " + newValue);
+            Debug.trace(DD, "myChoiceBox..selectedItemProperty() " + oldValue + " -> " + newValue);
 
             MonthCommand command = new MonthCommand(oldValue, newValue);
             invoker.invoke(command);
@@ -565,21 +566,21 @@ public class PrimaryController {
         daySpinner.setTooltip(new Tooltip("Select your favourite day"));
         
         intSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            Debug.info("intSpinner.Listener(" + newValue + ")");
+            Debug.trace(DD, "intSpinner.Listener(" + newValue + ")");
 
             IntegerCommand command = new IntegerCommand(oldValue, newValue);
             invoker.invoke(command);
         });
 
         doubleSpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            Debug.info("doubleSpinner.Listener(" + newValue + ")");
+            Debug.trace(DD, "doubleSpinner.Listener(" + newValue + ")");
 
             DoubleCommand command = new DoubleCommand(oldValue, newValue);
             invoker.invoke(command);
         });
 
         daySpinner.valueProperty().addListener( (v, oldValue, newValue) -> {
-            Debug.info("daySpinner.Listener(" + newValue + ")");
+            Debug.trace(DD, "daySpinner.Listener(" + newValue + ")");
 
             DayCommand command = new DayCommand(oldValue, newValue);
             invoker.invoke(command);

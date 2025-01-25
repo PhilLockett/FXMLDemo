@@ -27,9 +27,12 @@ package phillockett65.FXMLDemo.Command;
 
 import java.util.LinkedList;
 
-import phillockett65.FXMLDemo.Debug;
+import phillockett65.Debug.Debug;
 
 public class Invoker {
+
+    // Debug delta used to adjust the local logging level.
+    private static final int DD = 0;
 
     private static Invoker instance = new Invoker();
     private LinkedList<Command> undoStack = new LinkedList<>();
@@ -75,12 +78,12 @@ public class Invoker {
      * @param command to execute.
      */
     public void invoke(Command command) {
-        Debug.info("invoke(" + command + ")");
+        Debug.trace(DD, "invoke(" + command + ")");
 
         // If new command is triggered by a handler after an undo, silently 
         // drop it.
         if (isHandlerCausingARevert(command)) {
-            Debug.info("Dropped ");
+            Debug.info(DD, "Dropped ");
 
             return;
         }
@@ -90,7 +93,7 @@ public class Invoker {
             command.execute();
 
             undoStack.push(command);
-            Debug.info("Pushed first ");
+            Debug.info(DD, "Pushed first ");
 
             redoStack.clear();
 
@@ -103,7 +106,7 @@ public class Invoker {
 
             Command current = undoStack.peek();
 
-            Debug.info("Updated and " + (current.isChanging() ? "different" : "SAME") + " ");
+            Debug.info(DD, "Updated and " + (current.isChanging() ? "different" : "SAME") + " ");
 
             return;
         }
@@ -112,8 +115,8 @@ public class Invoker {
         // silently drop it.
         if (isCurrentCommandChanging() == false) {
             Command dropped = undoStack.pop();
-            Debug.info("Dropping unchange current command ");
-            Debug.info(dropped.toString());
+            Debug.info(DD, "Dropping unchange current command ");
+            Debug.info(DD, dropped.toString());
         }
 
         // Handle the new command.
@@ -123,7 +126,7 @@ public class Invoker {
         // setValue() is called i.e. silently drop unchange commands.
         if (command.isChanging()) {
             undoStack.push(command);
-            Debug.info("Pushed ");
+            Debug.info(DD, "Pushed ");
             
             redoStack.clear();
         }
@@ -134,7 +137,7 @@ public class Invoker {
      * Undo the top command on the undo stack and move it to the redo stack.
      */
     public void undo() {
-        Debug.info("undo received " + undoStack.size());
+        Debug.trace(DD, "undo received " + undoStack.size());
         if (undoStack.isEmpty()) {
             return;
         }
@@ -148,7 +151,7 @@ public class Invoker {
      * Redo the top command on the redo stack and move it to the undo stack.
      */
     public void redo() {
-        Debug.info("redo received " + redoStack.size());
+        Debug.trace(DD, "redo received " + redoStack.size());
         if (redoStack.isEmpty()) {
             return;
         }
@@ -179,7 +182,7 @@ public class Invoker {
      * Clear all stacks and queues.
      */
     public void clear() {
-        Debug.info("clear received");
+        Debug.trace(DD, "clear received");
         undoStack.clear();
         redoStack.clear();
         doQueue.clear();
@@ -189,10 +192,10 @@ public class Invoker {
      * Debug.
      */
     public void dump() {
-        Debug.info("undoStack: " + undoStack);
-        Debug.info("redoStack: " + redoStack);
-        Debug.info("doQueue: " + doQueue);
-        Debug.info("");
+        Debug.info(DD, "undoStack: " + undoStack);
+        Debug.info(DD, "redoStack: " + redoStack);
+        Debug.info(DD, "doQueue: " + doQueue);
+        Debug.info(DD, "");
     }
 
 }
