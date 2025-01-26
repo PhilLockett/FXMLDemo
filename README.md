@@ -69,3 +69,5 @@ This code has the following points of interest:
   * Multi stage initialization minimizes the need for null checks. 
   * Data persistence is provided by the Serializable DataStore object.
   * The GUI is implemented in FXML using SceneBuilder.
+  * A static Debug object helps control diagnostic output.
+  * The Command Pattern is used to support an Undo/Redo mechanism.
